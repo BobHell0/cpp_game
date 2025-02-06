@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 
 bool MenuState::loadMedia(SDL_Window *window) {
-    SDL_Surface *tempCoverImage = SDL_LoadBMP("/Users/unswaccount/Documents/PersonalProjects/cpp_game/src/images/coolCover.bmp");
+    SDL_Surface *tempCoverImage = SDL_LoadBMP("./src/images/coolCover.bmp");
     if (tempCoverImage == NULL) {
         std::cerr << "Unable to load image" << SDL_GetError() << std::endl;
         return false;
