@@ -1,5 +1,9 @@
 build:
-	g++ -Wall ./src/*.cpp -o game -I/opt/homebrew/include/ -L/opt/homebrew/lib -lSDL2
+	g++ -Wall \
+		./src/MenuState.cpp \
+		./src/main.cpp \
+		-o game \
+		-I/opt/homebrew/include/ -L/opt/homebrew/lib -lSDL2
 run:
 	./game
 clean:
