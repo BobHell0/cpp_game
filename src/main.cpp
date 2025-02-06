@@ -40,7 +40,7 @@ bool initialise_window(SDL_Window **window, SDL_Renderer **renderer) {
     return true;
 }
 
-void process_input(bool *gameIsRunning) {
+void global_process_input(bool *gameIsRunning, MenuState *state) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
@@ -51,6 +51,9 @@ void process_input(bool *gameIsRunning) {
                 if (event.key.keysym.sym == SDLK_ESCAPE) {
                     *gameIsRunning = false;
                 }
+                break;
+            default:
+                state->process_input(event);
                 break;
         }
     }
@@ -96,11 +99,11 @@ int main() {
     state.onEnter(window, renderer);
 
     while (gameIsRunning) {
-        process_input(&gameIsRunning);
+        global_process_input(&gameIsRunning, &state);
         state.update();
         state.render(renderer);
     }
-    
+
     state.onExit();
     destroy_window(window, renderer);
     return 0;
