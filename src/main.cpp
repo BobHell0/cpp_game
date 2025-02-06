@@ -1,10 +1,26 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "./constants.h"
+struct gameObject {
+    int x;
+    int y;
+    int width;
+    int height;
+};
 
 SDL_Window *window = NULL;
 SDL_Renderer *renderer = NULL;
 bool gameIsRunning = false;
+int lastFrameTime = 0;
+
+struct gameObject player = {
+    0,
+    0,
+    20,
+    20
+};
+
+
 
 bool initiialise_window(void) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -58,10 +74,22 @@ void process_input() {
 
 
 void update() {
-    
+    // waste time time until we reach the frame target time
+    while (!SDL_TICKS_PASSED(SDL_GetTicks(), lastFrameTime + FRAME_TARGET_TIME));
+    lastFrameTime = SDL_GetTicks(); // Set the lastFrameTime to the current time.
+    player.x += 2;
+    player.y += 2; 
 }
 
 void render() {
+    SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+    SDL_RenderClear(renderer);      // clear the window to the draw color
+
+    SDL_Rect rect = {player.x, player.y, player.width, player.height};
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+    SDL_RenderFillRect(renderer, &rect); // draw the rectangle
+    SDL_RenderPresent(renderer);    // draw the new image to the window
+
 }
 
 void destroy_window() {

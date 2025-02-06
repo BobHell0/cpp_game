@@ -4,3 +4,8 @@ run:
 	./game
 clean:
 	rm game
+
+
+execute:
+	make build
+	make run
