@@ -13,3 +13,4 @@ clean:
 execute:
 	make build
 	make run
+	make clean
