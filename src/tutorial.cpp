@@ -75,8 +75,10 @@ void process_input() {
 
 void update() {
     // waste time time until we reach the frame target time
-
-    SDL_Delay(FRAME_TARGET_TIME);
+    // int time_to_wait = FRAME_TARGET_TIME - (SDL_GetTicks() - lastFrameTime);
+    // if (time_to_wait > 0 && time_to_wait <= FRAME_TARGET_TIME) {
+    //     SDL_Delay(time_to_wait);
+    // } 
     float delta_time = (SDL_GetTicks() - lastFrameTime) / 1000.0f;
     
     lastFrameTime = SDL_GetTicks(); // Set the lastFrameTime to the current time.
