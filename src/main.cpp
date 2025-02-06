@@ -2,10 +2,10 @@
 #include <SDL2/SDL.h>
 #include "./constants.h"
 struct gameObject {
-    int x;
-    int y;
-    int width;
-    int height;
+    float x;
+    float y;
+    float width;
+    float height;
 };
 
 SDL_Window *window = NULL;
@@ -75,10 +75,14 @@ void process_input() {
 
 void update() {
     // waste time time until we reach the frame target time
-    while (!SDL_TICKS_PASSED(SDL_GetTicks(), lastFrameTime + FRAME_TARGET_TIME));
+
+    SDL_Delay(FRAME_TARGET_TIME);
+    float delta_time = (SDL_GetTicks() - lastFrameTime) / 1000.0f;
+    
     lastFrameTime = SDL_GetTicks(); // Set the lastFrameTime to the current time.
-    player.x += 2;
-    player.y += 2; 
+    
+    player.x += 20.0 * delta_time;
+    player.y += 60.0 * delta_time; 
 }
 
 void render() {
