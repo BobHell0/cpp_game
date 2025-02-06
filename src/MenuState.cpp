@@ -24,6 +24,33 @@ bool MenuState::loadMedia(SDL_Window *window) {
     return true;
 }
 
+void MenuState::process_input(SDL_Event event) {
+
+
+    switch (event.type) {
+        case SDL_MOUSEBUTTONDOWN:
+            std::cout << "Mouse button pressed" << std::endl;
+            MenuState::handleMouseClick();
+            break;
+        default:
+            break;
+    }
+
+}
+
+void MenuState::handleMouseClick() {
+    int x = 0, y = 0;
+    if (SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
+        if (x >= 150 && x <= 250 && y >= 200 && y <= 250) {
+            std::cout << "Mouse button pressed; " << x << ", "<< y << std::endl;
+            std::cout << "Clicked On The BIG RED BUTTON " << x << ", "<< y << std::endl;
+        }
+        
+    } else {
+        std::cout << "Mouse button not pressed; " << SDL_BUTTON(SDL_BUTTON_LEFT) << "   " << SDL_GetMouseState(&x, &y) << std::endl;
+    }
+}
+
 void MenuState::update() {
     return;
 }
@@ -41,7 +68,11 @@ bool MenuState::onEnter(SDL_Window *window, SDL_Renderer *renderer) {
     }
 
     SDL_RenderCopy( SDL_GetRenderer(window), this->coverTexture, NULL, NULL );
-
+    
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_Rect rect = {150, 200, 100, 50};
+    SDL_RenderFillRect(renderer, &rect);
+    
     //Update screen
     SDL_RenderPresent( renderer );
     return true;
