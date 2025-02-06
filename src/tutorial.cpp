@@ -79,21 +79,21 @@ void update() {
     // if (time_to_wait > 0 && time_to_wait <= FRAME_TARGET_TIME) {
     //     SDL_Delay(time_to_wait);
     // } 
-    float delta_time = (SDL_GetTicks() - lastFrameTime) / 1000.0f;
+    // float delta_time = (SDL_GetTicks() - lastFrameTime) / 1000.0f;
     
-    lastFrameTime = SDL_GetTicks(); // Set the lastFrameTime to the current time.
+    // lastFrameTime = SDL_GetTicks(); // Set the lastFrameTime to the current time.
     
-    player.x += 20.0 * delta_time;
-    player.y += 60.0 * delta_time; 
+    // player.x += 20.0 * delta_time;
+    // player.y += 60.0 * delta_time; 
 }
 
 void render() {
     SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
     SDL_RenderClear(renderer);      // clear the window to the draw color
 
-    SDL_Rect rect = {player.x, player.y, player.width, player.height};
-    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-    SDL_RenderFillRect(renderer, &rect); // draw the rectangle
+    // SDL_Rect rect = {player.x, player.y, player.width, player.height};
+    // SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+    // SDL_RenderFillRect(renderer, &rect); // draw the rectangle
     SDL_RenderPresent(renderer);    // draw the new image to the window
 
 }
@@ -110,12 +110,11 @@ int main() {
     setup(); // TODO: Implement this function
 
     while (gameIsRunning) {
-        process_input(); // TODO: Implement this function
-        update(); // TODO: Implement this function
-        render(); // TODO: Implement this function
-
+        process_input();
+        update();
+        render();
     }
 
+    destroy_window();
     return 0;
-
 }
