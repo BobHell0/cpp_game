@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "Button.hpp"
+#include "../Button.hpp"
 #include "AbstractState.hpp"
 
 

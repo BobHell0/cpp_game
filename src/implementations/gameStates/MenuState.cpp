@@ -1,5 +1,5 @@
-#include "../../headerFiles/MenuState.hpp"
-#include "../../headerFiles/IntroState.hpp"
+#include "../../headerFiles/states/MenuState.hpp"
+#include "../../headerFiles/states/IntroState.hpp"
 
 #include "../../headerFiles/Button.hpp"
 

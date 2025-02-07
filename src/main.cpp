@@ -1,8 +1,8 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "./headerFiles/constants.hpp"
-#include "./headerFiles/MenuState.hpp"
-#include "./headerFiles/AbstractState.hpp"
+#include "./headerFiles/states/MenuState.hpp"
+#include "./headerFiles/states/AbstractState.hpp"
 
 bool initialise_window(SDL_Window **window, SDL_Renderer **renderer) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
