@@ -1,8 +1,9 @@
 #include "../../headerFiles/MenuState.hpp"
 #include <iostream>
 #include <SDL2/SDL.h>
+#include "../../headerFiles/Button.hpp"
 
-bool MenuState::loadMedia(SDL_Window *window) {
+bool MenuState::loadMedia(SDL_Renderer *renderer) {
     SDL_Surface *tempCoverImage = SDL_LoadBMP("./src/images/coolCover.bmp");
     if (tempCoverImage == NULL) {
         std::cerr << "Unable to load image" << SDL_GetError() << std::endl;
@@ -12,7 +13,7 @@ bool MenuState::loadMedia(SDL_Window *window) {
     std::cout << "Image loaded successfully" << std::endl;
 
 
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(SDL_GetRenderer(window), tempCoverImage);
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, tempCoverImage);
 
     if (texture == NULL) {
         std::cout << "Unable to create texture from surface" << SDL_GetError() << std::endl;
@@ -29,7 +30,6 @@ void MenuState::process_input(SDL_Event event) {
 
     switch (event.type) {
         case SDL_MOUSEBUTTONDOWN:
-            std::cout << "Mouse button pressed" << std::endl;
             MenuState::handleMouseClick();
             break;
         default:
@@ -63,17 +63,23 @@ void MenuState::render(SDL_Renderer *renderer) {
 }
 
 bool MenuState::onEnter(SDL_Window *window, SDL_Renderer *renderer) {
-    if (!loadMedia(window)) {
-        return false;
-    }
+    // if (!loadMedia(renderer)) {
+    //     return false;
+    // }
 
-    SDL_RenderCopy( SDL_GetRenderer(window), this->coverTexture, NULL, NULL );
+    // SDL_RenderCopy( SDL_GetRenderer(window), this->coverTexture, NULL, NULL );
     
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    SDL_Rect rect = {150, 200, 100, 50};
-    SDL_RenderFillRect(renderer, &rect);
+    // SDL_Rect rect = {150, 200, 100, 50};
+    SDL_RenderClear(renderer);
     
-    //Update screen
+
+    SDL_Rect sRect = {0, 0, 100, 200};
+    SDL_Rect dRect = {150, 200, 100, 50};
+    Button *button = new Button(renderer, sRect, dRect);
+    button->draw(renderer);
+    
+    // Update screen
     SDL_RenderPresent( renderer );
     return true;
 }
