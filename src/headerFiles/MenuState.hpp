@@ -1,7 +1,6 @@
 #ifndef MENUSTATE_HPP
 #define MENUSTATE_HPP
 
-#include <string>
 #include <SDL2/SDL.h>
 
 class MenuState {
