@@ -1,4 +1,4 @@
-#include "./headerFiles/MenuState.hpp"
+#include "../../headerFiles/MenuState.hpp"
 #include <iostream>
 #include <SDL2/SDL.h>
 
