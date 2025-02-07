@@ -1,11 +1,10 @@
 #include "../../headerFiles/MenuState.hpp"
 #include "../../headerFiles/IntroState.hpp"
 
-#include <iostream>
-#include <SDL2/SDL.h>
 #include "../../headerFiles/Button.hpp"
 
-MenuState::MenuState(SDL_Renderer *renderer) {
+MenuState::MenuState(SDL_Window *window, SDL_Renderer *renderer) {
+
     MenuState::renderer = renderer;
 }
 
@@ -31,12 +30,11 @@ bool MenuState::loadMedia() {
     return true;
 }
 
-void MenuState::process_input(SDL_Event event) {
-
+void MenuState::process_input(SDL_Event event, AbstractState **state) {
 
     switch (event.type) { 
         case SDL_MOUSEBUTTONDOWN:
-            MenuState::handleMouseClick();
+            MenuState::handleMouseClick(state);
             break;
         default:
             break;
@@ -44,12 +42,17 @@ void MenuState::process_input(SDL_Event event) {
 
 }
 
-void MenuState::handleMouseClick() {
+void MenuState::handleMouseClick(AbstractState **state) {
     int x = 0, y = 0;
     if (SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
-        if (x >= 150 && x <= 250 && y >= 200 && y <= 250) {
+        if (x >= 150 && x <= 250 && y >= 200 && y <= 250) { // TODO: Get rid of magic numbers
             std::cout << "Mouse button pressed; " << x << ", "<< y << std::endl;
             std::cout << "Clicked On The BIG RED BUTTON" << std::endl;
+            (*state)->onExit();
+            *state = new IntroState(window, renderer);
+            std::cout << "state = " << (*state)->getStateID() << std::endl;
+            (*state)->onEnter();
+
         }
         
     } else {
@@ -71,7 +74,7 @@ void MenuState::render() {
     SDL_RenderPresent(renderer);
 }
 
-bool MenuState::onEnter(SDL_Window *window) {
+bool MenuState::onEnter() {
     // if (!loadMedia(renderer)) {
     //     return false;
     // }
@@ -94,8 +97,7 @@ bool MenuState::onEnter(SDL_Window *window) {
 }
 
 void MenuState::onExit() {
-    SDL_DestroyTexture(this->coverTexture);
-    return;
+    MenuState::startButton->destroyButton();
 }
 
 std::string MenuState::getStateID() {

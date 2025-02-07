@@ -6,10 +6,10 @@
 
 class AbstractState {
 public:
-    virtual void process_input(SDL_Event event) = 0;
+    virtual void process_input(SDL_Event event, AbstractState **state) = 0;
     virtual void update() = 0;
     virtual void render() = 0;
-    virtual bool onEnter(SDL_Window *window) = 0;
+    virtual bool onEnter() = 0;
     virtual void onExit() = 0;
     virtual std::string getStateID() = 0;
 };

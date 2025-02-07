@@ -8,10 +8,6 @@
 class Button {
     private: 
         SDL_Renderer *renderer;
-        struct rgba colour;
-        struct rgba hoverColour;
-        struct rgba clickColour;
-        SDL_Rect rect;
         SDL_Texture *texture;
         SDL_Rect sRect, dRect;
         bool isHovered;
@@ -21,6 +17,7 @@ class Button {
 
         void update();
         void draw();
+        void destroyButton();
 
 };
 

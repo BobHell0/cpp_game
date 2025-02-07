@@ -40,3 +40,7 @@ void Button::update() {
 void Button::draw() {
     SDL_RenderCopy(renderer, texture, &sRect, &dRect);
 }
+
+void Button::destroyButton() {
+    SDL_DestroyTexture(Button::texture);
+}

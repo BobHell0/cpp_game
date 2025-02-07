@@ -9,19 +9,20 @@
 
 class MenuState : public AbstractState {
 public:
-    MenuState(SDL_Renderer *renderer);
+    MenuState(SDL_Window *window, SDL_Renderer *renderer);
 
-    void process_input(SDL_Event event);
+    void process_input(SDL_Event event, AbstractState **state);
     void update();
     void render();
-    bool onEnter(SDL_Window *window);
+    bool onEnter();
     void onExit();
     std::string getStateID();
 
 private:
     bool loadMedia();
-    void handleMouseClick();
-
+    void handleMouseClick(AbstractState **state);
+    
+    SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Texture *coverTexture;
     Button *startButton;
