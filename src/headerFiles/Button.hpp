@@ -19,6 +19,8 @@ class Button {
         void draw();
         void destroyButton();
 
+        SDL_Rect getDRect();
+
 };
 
 #endif // BUTTON_HPP

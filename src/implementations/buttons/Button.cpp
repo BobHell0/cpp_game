@@ -44,3 +44,7 @@ void Button::draw() {
 void Button::destroyButton() {
     SDL_DestroyTexture(Button::texture);
 }
+
+SDL_Rect Button::getDRect() {
+    return Button::dRect;
+}
