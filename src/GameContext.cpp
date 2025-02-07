@@ -32,7 +32,7 @@ bool GameContext::initialise_window(SDL_Window **window, SDL_Renderer **renderer
     return true;
 }
 
-void GameContext::global_process_input(bool *gameIsRunning, AbstractState **state) {
+void GameContext::global_process_input(bool *gameIsRunning, AbstractState **currState) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
@@ -45,7 +45,7 @@ void GameContext::global_process_input(bool *gameIsRunning, AbstractState **stat
                 }
                 break;
             default:
-                (*state)->process_input(event, state);
+                (*currState)->process_input(event, currState);
                 break;
         }
     }
@@ -73,18 +73,18 @@ int GameContext::launchGame() {
 
     gameIsRunning = GameContext::initialise_window(&window, &renderer);
 
-    AbstractState *state = new MenuState(window, renderer);
+    GameContext::currState = new MenuState(window, renderer);
 
-    state->onEnter();
+    currState->onEnter();
 
     while (gameIsRunning) {
-        GameContext::global_process_input(&gameIsRunning, &state);
-        state->update();
-        state->render();
+        GameContext::global_process_input(&gameIsRunning, &currState);
+        currState->update();
+        currState->render();
 
     }
 
-    state->onExit();
+    currState->onExit();
 
     destroy_window(window, renderer);
     return 0;
