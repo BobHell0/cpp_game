@@ -11,6 +11,7 @@ run:
 	./game
 clean:
 	rm game
+	rm -r game.dSYM
 
 
 execute:
