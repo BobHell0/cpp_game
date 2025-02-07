@@ -107,7 +107,7 @@ void destroy_window() {
 int main() {
     gameIsRunning = initiialise_window();
 
-    setup(); // TODO: Implement this function
+    setup();
 
     while (gameIsRunning) {
         process_input();
