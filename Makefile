@@ -2,6 +2,7 @@ build:
 	g++ -Wall \
 		./src/implementations/gameStates/*.cpp \
 		./src/implementations/buttons/Button.cpp \
+		./src/GameContext.cpp \
 		./src/main.cpp \
 		-o game \
 		-I/opt/homebrew/include/ -L/opt/homebrew/lib -lSDL2
