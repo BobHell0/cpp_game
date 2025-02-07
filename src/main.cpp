@@ -3,13 +3,6 @@
 #include "./headerFiles/constants.hpp"
 #include "./headerFiles/MenuState.hpp"
 
-struct gameObject {
-    float x;
-    float y;
-    float width;
-    float height;
-};
-
 
 bool initialise_window(SDL_Window **window, SDL_Renderer **renderer) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
