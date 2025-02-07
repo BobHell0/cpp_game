@@ -1,5 +1,6 @@
 build:
-	g++ -Wall \
+	g++ -Wall -g \
+		-fsanitize=address \
 		./src/implementations/gameStates/*.cpp \
 		./src/implementations/buttons/Button.cpp \
 		./src/GameContext.cpp \
