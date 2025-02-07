@@ -7,6 +7,7 @@
 
 class Button {
     private: 
+        SDL_Renderer *renderer;
         struct rgba colour;
         struct rgba hoverColour;
         struct rgba clickColour;
@@ -19,7 +20,7 @@ class Button {
         Button(SDL_Renderer *renderer, SDL_Rect sRect, SDL_Rect dRect);
 
         void update();
-        void draw(SDL_Renderer *renderer);
+        void draw();
 
 };
 

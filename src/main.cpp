@@ -88,13 +88,13 @@ int main() {
 
     gameIsRunning = initialise_window(&window, &renderer);
 
-    MenuState state = MenuState();
-    state.onEnter(window, renderer);
+    MenuState state = MenuState(renderer);
+    state.onEnter(window);
 
     while (gameIsRunning) {
         global_process_input(&gameIsRunning, &state);
         state.update();
-        state.render(renderer);
+        state.render();
     }
 
     state.onExit();

@@ -3,7 +3,12 @@
 #include <SDL2/SDL.h>
 #include "../../headerFiles/Button.hpp"
 
-bool MenuState::loadMedia(SDL_Renderer *renderer) {
+MenuState::MenuState(SDL_Renderer *renderer) {
+    MenuState::renderer = renderer;
+
+}
+
+bool MenuState::loadMedia() {
     SDL_Surface *tempCoverImage = SDL_LoadBMP("./src/images/coolCover.bmp");
     if (tempCoverImage == NULL) {
         std::cerr << "Unable to load image" << SDL_GetError() << std::endl;
@@ -28,7 +33,7 @@ bool MenuState::loadMedia(SDL_Renderer *renderer) {
 void MenuState::process_input(SDL_Event event) {
 
 
-    switch (event.type) {
+    switch (event.type) { 
         case SDL_MOUSEBUTTONDOWN:
             MenuState::handleMouseClick();
             break;
@@ -43,7 +48,7 @@ void MenuState::handleMouseClick() {
     if (SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
         if (x >= 150 && x <= 250 && y >= 200 && y <= 250) {
             std::cout << "Mouse button pressed; " << x << ", "<< y << std::endl;
-            std::cout << "Clicked On The BIG RED BUTTON " << x << ", "<< y << std::endl;
+            std::cout << "Clicked On The BIG RED BUTTON" << std::endl;
         }
         
     } else {
@@ -52,17 +57,20 @@ void MenuState::handleMouseClick() {
 }
 
 void MenuState::update() {
+    MenuState::startButton->update();
     return;
 }
 
-void MenuState::render(SDL_Renderer *renderer) {
+void MenuState::render() {
     // std::cout << "Rendering MenuState" << std::endl;
-    // SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    // SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_RenderClear(renderer);
+    MenuState::startButton->draw();
     // SDL_RenderPresent(renderer);
+    SDL_RenderPresent(renderer);
 }
 
-bool MenuState::onEnter(SDL_Window *window, SDL_Renderer *renderer) {
+bool MenuState::onEnter(SDL_Window *window) {
     // if (!loadMedia(renderer)) {
     //     return false;
     // }
@@ -76,8 +84,8 @@ bool MenuState::onEnter(SDL_Window *window, SDL_Renderer *renderer) {
 
     SDL_Rect sRect = {0, 0, 100, 200};
     SDL_Rect dRect = {150, 200, 100, 50};
-    Button *button = new Button(renderer, sRect, dRect);
-    button->draw(renderer);
+    this->startButton = new Button(renderer, sRect, dRect);
+    this->startButton->draw();
     
     // Update screen
     SDL_RenderPresent( renderer );

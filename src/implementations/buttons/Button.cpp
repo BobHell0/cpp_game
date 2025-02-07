@@ -1,8 +1,10 @@
 #include "../../headerFiles/Button.hpp"
 #include <SDL2/SDL.h>
+#include <iostream>
 
 Button::Button(SDL_Renderer *renderer, SDL_Rect sRect, SDL_Rect dRect) {
     this->isHovered = false;
+    this->renderer = renderer;
     SDL_Surface *tempCoverImage = SDL_LoadBMP("./src/images/coolCover.bmp");
     if (tempCoverImage == NULL) {
         std::cerr << "Unable to load image" << SDL_GetError() << std::endl;
@@ -25,14 +27,16 @@ void Button::update() {
 
     if (SDL_HasIntersection(&(this->dRect), &mouseRect)) {
         this->isHovered = true;
-        SDL_Rect newSRect = {100, 100, 100, 200};
-        this->sRect = newSRect;
+        Button::sRect.x = 400;
     } else {
+        Button::sRect.x = 0;
         this->isHovered = false;
     }
+
+
     return;
 }
 
-void Button::draw(SDL_Renderer *renderer) {
+void Button::draw() {
     SDL_RenderCopy(renderer, texture, &sRect, &dRect);
 }

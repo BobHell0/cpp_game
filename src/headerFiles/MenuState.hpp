@@ -3,20 +3,29 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
+#include "Button.hpp"
 
 class MenuState {
 public:
-    SDL_Texture *coverTexture;
+
+
+    MenuState(SDL_Renderer *renderer);
+
 
     void process_input(SDL_Event event);
     void update();
-    void render(SDL_Renderer *renderer);
-    bool onEnter(SDL_Window *window, SDL_Renderer *renderer);
+    void render();
+    bool onEnter(SDL_Window *window);
     void onExit();
     std::string getStateID();
+    
 private:
-    bool loadMedia(SDL_Renderer *renderer);
+    bool loadMedia();
     void handleMouseClick();
+
+    SDL_Renderer *renderer;
+    SDL_Texture *coverTexture;
+    Button *startButton;
 };
 
 #endif // MENUSTATE_HPP
