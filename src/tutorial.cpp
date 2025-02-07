@@ -1,6 +1,6 @@
 #include <iostream>
 #include <SDL2/SDL.h>
-#include "./constants.h"
+#include "./headerFiles/constants.hpp"
 struct gameObject {
     float x;
     float y;

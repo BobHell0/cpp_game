@@ -1,15 +1,8 @@
 #include <iostream>
 #include <SDL2/SDL.h>
-#include "./constants.h"
+#include "./headerFiles/constants.hpp"
 #include "./headerFiles/MenuState.hpp"
-
-struct gameObject {
-    float x;
-    float y;
-    float width;
-    float height;
-};
-
+#include "./headerFiles/AbstractState.hpp"
 
 bool initialise_window(SDL_Window **window, SDL_Renderer **renderer) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -40,7 +33,7 @@ bool initialise_window(SDL_Window **window, SDL_Renderer **renderer) {
     return true;
 }
 
-void global_process_input(bool *gameIsRunning, MenuState *state) {
+void global_process_input(bool *gameIsRunning, AbstractState **state) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
@@ -53,7 +46,7 @@ void global_process_input(bool *gameIsRunning, MenuState *state) {
                 }
                 break;
             default:
-                state->process_input(event);
+                (*state)->process_input(event, state);
                 break;
         }
     }
@@ -61,23 +54,9 @@ void global_process_input(bool *gameIsRunning, MenuState *state) {
 
 
 void update(int *lastFrameTime) {
-    // waste time time until we reach the frame target time
-    // int time_to_wait = FRAME_TARGET_TIME - (SDL_GetTicks() - lastFrameTime);
-    // if (time_to_wait > 0 && time_to_wait <= FRAME_TARGET_TIME) {
-    //     SDL_Delay(time_to_wait);
-    // } 
     // float delta_time = (SDL_GetTicks() - *lastFrameTime) / 1000.0f;
     
     *lastFrameTime = SDL_GetTicks(); // Set the lastFrameTime to the current time.
-}
-
-void render(SDL_Renderer *renderer) {
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    SDL_RenderClear(renderer);      // clear the window to the draw color
-
-
-    SDL_RenderPresent(renderer);    // draw the new image to the window
-
 }
 
 void destroy_window(SDL_Window *window, SDL_Renderer *renderer) {
@@ -95,16 +74,19 @@ int main() {
 
     gameIsRunning = initialise_window(&window, &renderer);
 
-    MenuState state = MenuState();
-    state.onEnter(window, renderer);
+    AbstractState *state = new MenuState(window, renderer);
+
+    state->onEnter();
 
     while (gameIsRunning) {
         global_process_input(&gameIsRunning, &state);
-        state.update();
-        state.render(renderer);
+        state->update();
+        state->render();
+
     }
 
-    state.onExit();
+    state->onExit();
+
     destroy_window(window, renderer);
     return 0;
 }

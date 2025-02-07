@@ -1,22 +1,31 @@
 #ifndef MENUSTATE_HPP
 #define MENUSTATE_HPP
 
-#include <string>
 #include <SDL2/SDL.h>
+#include <iostream>
+#include "Button.hpp"
+#include "AbstractState.hpp"
 
-class MenuState {
+
+class MenuState : public AbstractState {
 public:
-    SDL_Texture *coverTexture;
+    MenuState(SDL_Window *window, SDL_Renderer *renderer);
 
-    void process_input(SDL_Event event);
+    void process_input(SDL_Event event, AbstractState **state);
     void update();
-    void render(SDL_Renderer *renderer);
-    bool onEnter(SDL_Window *window, SDL_Renderer *renderer);
+    void render();
+    bool onEnter();
     void onExit();
     std::string getStateID();
+
 private:
-    bool loadMedia(SDL_Window *window);
-    void handleMouseClick();
+    bool loadMedia();
+    void handleMouseClick(AbstractState **state);
+    
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+    SDL_Texture *coverTexture;
+    Button *startButton;
 };
 
 #endif // MENUSTATE_HPP
