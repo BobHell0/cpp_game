@@ -2,6 +2,7 @@
 #define MENUSTATE_HPP
 
 #include <SDL2/SDL.h>
+#include <iostream>
 
 class MenuState {
 public:
@@ -14,7 +15,7 @@ public:
     void onExit();
     std::string getStateID();
 private:
-    bool loadMedia(SDL_Window *window);
+    bool loadMedia(SDL_Renderer *renderer);
     void handleMouseClick();
 };
 
