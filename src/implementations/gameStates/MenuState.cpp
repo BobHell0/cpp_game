@@ -1,11 +1,12 @@
 #include "../../headerFiles/MenuState.hpp"
+#include "../../headerFiles/IntroState.hpp"
+
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "../../headerFiles/Button.hpp"
 
 MenuState::MenuState(SDL_Renderer *renderer) {
     MenuState::renderer = renderer;
-
 }
 
 bool MenuState::loadMedia() {

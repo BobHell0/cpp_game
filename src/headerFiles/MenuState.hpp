@@ -4,13 +4,12 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "Button.hpp"
+#include "AbstractState.hpp"
 
-class MenuState {
+
+class MenuState : public AbstractState {
 public:
-
-
     MenuState(SDL_Renderer *renderer);
-
 
     void process_input(SDL_Event event);
     void update();
@@ -18,7 +17,7 @@ public:
     bool onEnter(SDL_Window *window);
     void onExit();
     std::string getStateID();
-    
+
 private:
     bool loadMedia();
     void handleMouseClick();

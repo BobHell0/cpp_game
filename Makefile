@@ -1,6 +1,6 @@
 build:
 	g++ -Wall \
-		./src/implementations/gameStates/MenuState.cpp \
+		./src/implementations/gameStates/*.cpp \
 		./src/implementations/buttons/Button.cpp \
 		./src/main.cpp \
 		-o game \

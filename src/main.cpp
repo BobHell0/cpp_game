@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 #include "./headerFiles/constants.hpp"
 #include "./headerFiles/MenuState.hpp"
-
+#include "./headerFiles/AbstractState.hpp"
 
 bool initialise_window(SDL_Window **window, SDL_Renderer **renderer) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -33,7 +33,7 @@ bool initialise_window(SDL_Window **window, SDL_Renderer **renderer) {
     return true;
 }
 
-void global_process_input(bool *gameIsRunning, MenuState *state) {
+void global_process_input(bool *gameIsRunning, AbstractState *state) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
@@ -88,16 +88,18 @@ int main() {
 
     gameIsRunning = initialise_window(&window, &renderer);
 
-    MenuState state = MenuState(renderer);
-    state.onEnter(window);
+    AbstractState *state = new MenuState(renderer);
+
+    state->onEnter(window);
 
     while (gameIsRunning) {
-        global_process_input(&gameIsRunning, &state);
-        state.update();
-        state.render();
+        global_process_input(&gameIsRunning, state);
+        state->update();
+        state->render();
     }
 
-    state.onExit();
+    state->onExit();
+    delete state;
     destroy_window(window, renderer);
     return 0;
 }
