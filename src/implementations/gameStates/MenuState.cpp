@@ -1,6 +1,5 @@
 #include "../../headerFiles/states/MenuState.hpp"
-#include "../../headerFiles/states/IntroState.hpp"
-#include "../../headerFiles/Button.hpp"
+
 
 MenuState::MenuState(SDL_Window *window, SDL_Renderer *renderer) {
 
@@ -44,7 +43,13 @@ void MenuState::process_input(SDL_Event event, AbstractState **state) {
 void MenuState::handleMouseClick(AbstractState **state) {
     int x = 0, y = 0;
     if (SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
-        if (x >= 150 && x <= 250 && y >= 200 && y <= 250) { // TODO: Get rid of magic numbers
+        int buttonLeftX = MenuState::startButton->getDRect().x;
+        int buttonRightX = buttonLeftX + MenuState::startButton->getDRect().w;
+
+        int buttonTopY = MenuState::startButton->getDRect().y;
+        int buttonBottomY = buttonTopY + MenuState::startButton->getDRect().h;
+
+        if (x >= buttonLeftX && x <= buttonRightX && y >= buttonTopY && y <= buttonBottomY) {
             std::cout << "Mouse button pressed; " << x << ", "<< y << std::endl;
             std::cout << "Clicked On The BIG RED BUTTON" << std::endl;
             
