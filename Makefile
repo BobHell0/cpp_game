@@ -3,6 +3,7 @@ build:
 		-fsanitize=address \
 		./src/implementations/gameStates/*.cpp \
 		./src/implementations/buttons/Button.cpp \
+		./src/implementations/*.cpp
 		./src/GameContext.cpp \
 		./src/main.cpp \
 		-o game \

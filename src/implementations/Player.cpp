@@ -14,7 +14,10 @@ void Player::updatePlayerPosition(int xDisplacement, int yDisplacement) {
 
 void Player::render() {
     SDL_Rect playerRect;
-    playerRect.x, playerRect.y, playerRect.w, playerRect.h = Player::x, Player::y, 10, 10; // TODO: Remove magic number
+    playerRect.x = Player::x;
+    playerRect.y =  Player::y;
+    playerRect.w = 10;
+    playerRect.h = 10; // TODO: Remove magic number
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderFillRect(Player::renderer, &playerRect);
 }

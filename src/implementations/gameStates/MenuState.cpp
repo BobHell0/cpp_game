@@ -4,6 +4,7 @@
 MenuState::MenuState(SDL_Window *window, SDL_Renderer *renderer) {
 
     MenuState::renderer = renderer;
+    MenuState::player = new Player(window, renderer);       // allocated memory - ensure you free it
 }
 
 bool MenuState::loadMedia() {
@@ -34,6 +35,10 @@ void MenuState::process_input(SDL_Event event, AbstractState **state) {
         case SDL_MOUSEBUTTONDOWN:
             MenuState::handleMouseClick(state);
             break;
+        case SDL_KEYDOWN:
+            if (event.key.keysym.sym == SDLK_UP) {
+                // move player up
+            }
         default:
             break;
     }
@@ -85,6 +90,7 @@ bool MenuState::onEnter() {
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     // SDL_Rect rect = {150, 200, 100, 50};
     SDL_RenderClear(renderer);
+    MenuState::player->render();
     
 
     SDL_Rect sRect = {0, 0, 100, 200};
@@ -99,6 +105,7 @@ bool MenuState::onEnter() {
 
 void MenuState::onExit() {
     MenuState::startButton->destroyButton();
+    delete MenuState::player;
 }
 
 std::string MenuState::getStateID() {

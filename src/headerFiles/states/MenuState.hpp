@@ -7,6 +7,7 @@
 #include "AbstractState.hpp"
 #include "IntroState.hpp"
 #include "../constants.hpp"
+#include "../Player.hpp"
 
 
 class MenuState : public AbstractState {
@@ -28,6 +29,9 @@ private:
     SDL_Renderer *renderer;
     SDL_Texture *coverTexture;
     Button *startButton;
+    Player *player;
+
+    
 };
 
 #endif // MENUSTATE_HPP
