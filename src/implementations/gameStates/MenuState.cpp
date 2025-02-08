@@ -37,7 +37,13 @@ void MenuState::process_input(SDL_Event event, AbstractState **state) {
             break;
         case SDL_KEYDOWN:
             if (event.key.keysym.sym == SDLK_UP) {
-                // move player up
+                MenuState::player->updatePlayerPosition(0, -10);
+            } else if (event.key.keysym.sym == SDLK_RIGHT) {
+                MenuState::player->updatePlayerPosition(10, 0);
+            } else if (event.key.keysym.sym == SDLK_DOWN) {
+                MenuState::player->updatePlayerPosition(0, 10);
+            } else if (event.key.keysym.sym == SDLK_LEFT) {
+                MenuState::player->updatePlayerPosition(-10, 0);
             }
         default:
             break;
@@ -76,7 +82,7 @@ void MenuState::render() {
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderClear(renderer);
     MenuState::startButton->draw();
-    // SDL_RenderPresent(renderer);
+    MenuState::player->render();
     SDL_RenderPresent(renderer);
 }
 
@@ -90,13 +96,11 @@ bool MenuState::onEnter() {
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     // SDL_Rect rect = {150, 200, 100, 50};
     SDL_RenderClear(renderer);
-    MenuState::player->render();
-    
 
     SDL_Rect sRect = {0, 0, 100, 200};
     SDL_Rect dRect = {150, 200, 100, 50};
     this->startButton = new Button(renderer, sRect, dRect);
-    this->startButton->draw();
+
     
     // Update screen
     SDL_RenderPresent( renderer );
