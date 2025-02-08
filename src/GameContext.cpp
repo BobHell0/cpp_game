@@ -1,6 +1,3 @@
-#include <iostream>
-#include <SDL2/SDL.h>
-
 #include "./headerFiles/GameContext.hpp"
 
 bool GameContext::initialise_window(SDL_Window **window, SDL_Renderer **renderer) {
@@ -81,7 +78,6 @@ int GameContext::launchGame() {
         GameContext::global_process_input(&gameIsRunning, &currState);
         currState->update();
         currState->render();
-
     }
 
     currState->onExit();

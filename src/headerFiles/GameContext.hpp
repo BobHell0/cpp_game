@@ -1,4 +1,6 @@
 #include <SDL2/SDL.h>
+#include <iostream>
+
 #include "./states/AbstractState.hpp"
 #include "./constants.hpp"
 #include "./states/MenuState.hpp"

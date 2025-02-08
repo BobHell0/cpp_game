@@ -1,6 +1,4 @@
 #include "../../headerFiles/Button.hpp"
-#include <SDL2/SDL.h>
-#include <iostream>
 
 Button::Button(SDL_Renderer *renderer, SDL_Rect sRect, SDL_Rect dRect) {
     this->isHovered = false;
@@ -15,9 +13,6 @@ Button::Button(SDL_Renderer *renderer, SDL_Rect sRect, SDL_Rect dRect) {
     
     this->sRect = sRect;
     this->dRect = dRect;
-
-
-
 }
 
 void Button::update() {
@@ -32,8 +27,6 @@ void Button::update() {
         Button::sRect.x = 0;
         this->isHovered = false;
     }
-
-
     return;
 }
 
