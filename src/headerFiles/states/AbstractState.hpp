@@ -13,6 +13,11 @@ public:
     virtual void onExit() = 0;
     
     virtual std::string getStateID() = 0;
+    /**
+     * currState refers to the address of the currState pointer stored in gameContext instance
+     * newState is a pointer to the new state
+     */
+    void transitionState(AbstractState **currState, AbstractState *newState);
 
     virtual ~AbstractState() {};
 };
