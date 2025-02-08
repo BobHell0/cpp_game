@@ -6,7 +6,7 @@
 #include "../Button.hpp"
 #include "AbstractState.hpp"
 #include "IntroState.hpp"
-#include "constants.hpp"
+#include "../constants.hpp"
 
 
 class MenuState : public AbstractState {
