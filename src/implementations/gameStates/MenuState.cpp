@@ -52,7 +52,7 @@ void MenuState::handleMouseClick(AbstractState **state) {
         if (x >= buttonLeftX && x <= buttonRightX && y >= buttonTopY && y <= buttonBottomY) {
             std::cout << "Mouse button pressed; " << x << ", "<< y << std::endl;
             std::cout << "Clicked On The BIG RED BUTTON" << std::endl;
-            
+            // TODO: Create a transfer state function
             (*state)->onExit();
             AbstractState *tempDelete = *state;
             *state = new IntroState(window, renderer);
