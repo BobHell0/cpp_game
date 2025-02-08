@@ -1,4 +1,4 @@
-#include "../../headerFiles/IntroState.hpp"
+#include "../../headerFiles/states/IntroState.hpp"
 
 IntroState::IntroState(SDL_Window *window, SDL_Renderer *renderer) {
     IntroState::window = window;
