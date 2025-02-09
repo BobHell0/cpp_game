@@ -37,13 +37,13 @@ void MenuState::process_input(SDL_Event event, AbstractState **state) {
             break;
         case SDL_KEYDOWN:
             if (event.key.keysym.sym == SDLK_UP) {
-                MenuState::player->updatePlayerPosition(0, -10);
+                MenuState::player->movePlayerUp();
             } else if (event.key.keysym.sym == SDLK_RIGHT) {
-                MenuState::player->updatePlayerPosition(10, 0);
+                MenuState::player->movePlayerRight();
             } else if (event.key.keysym.sym == SDLK_DOWN) {
-                MenuState::player->updatePlayerPosition(0, 10);
+                MenuState::player->movePlayerDown();
             } else if (event.key.keysym.sym == SDLK_LEFT) {
-                MenuState::player->updatePlayerPosition(-10, 0);
+                MenuState::player->movePlayerLeft();
             }
         default:
             break;
