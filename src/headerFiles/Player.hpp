@@ -1,3 +1,6 @@
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
+
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <cmath>
@@ -32,3 +35,5 @@ private:
     float x;
     float y;
 };
+
+#endif
