@@ -1,6 +1,3 @@
-#include <iostream>
-#include <SDL2/SDL.h>
-
 #include "./headerFiles/GameContext.hpp"
 
 bool GameContext::initialise_window(SDL_Window **window, SDL_Renderer **renderer) {
@@ -39,11 +36,11 @@ void GameContext::global_process_input(bool *gameIsRunning, AbstractState **curr
             case SDL_QUIT:
                 *gameIsRunning = false;
                 break;
-            case SDL_KEYDOWN:
-                if (event.key.keysym.sym == SDLK_ESCAPE) {
-                    *gameIsRunning = false;
-                }
-                break;
+            // case SDL_KEYUP:
+            //     if (event.key.keysym.sym == SDLK_ESCAPE) {
+            //         *gameIsRunning = false;
+            //     }
+            //     break;
             default:
                 (*currState)->process_input(event, currState);
                 break;
@@ -81,7 +78,6 @@ int GameContext::launchGame() {
         GameContext::global_process_input(&gameIsRunning, &currState);
         currState->update();
         currState->render();
-
     }
 
     currState->onExit();

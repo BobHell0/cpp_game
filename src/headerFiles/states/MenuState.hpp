@@ -7,7 +7,14 @@
 #include "AbstractState.hpp"
 #include "IntroState.hpp"
 #include "../constants.hpp"
+#include "../Player.hpp"
 
+enum ARROW_KEYS {
+    UP = 0,
+    RIGHT = 1,
+    DOWN = 2,
+    LEFT = 3
+};
 
 class MenuState : public AbstractState {
 public:
@@ -23,11 +30,16 @@ public:
 private:
     bool loadMedia();
     void handleMouseClick(AbstractState **state);
-    
+    void handlePlayerMove();
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Texture *coverTexture;
     Button *startButton;
+    Player *player;
+
+    bool *pressedArrow;
+
+    int lastFrameTime;
 };
 
 #endif // MENUSTATE_HPP

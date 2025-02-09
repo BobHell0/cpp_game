@@ -22,7 +22,6 @@ bool IntroState::onEnter() {
     SDL_SetRenderDrawColor(IntroState::renderer, 255, 255, 0, 255);
     SDL_RenderClear(IntroState::renderer);
     SDL_RenderPresent(IntroState::renderer);
-    std::cout << "I AM HERE!!!\n";
     return true;
 }
 
