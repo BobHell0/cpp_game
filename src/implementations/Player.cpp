@@ -5,54 +5,56 @@ Player::Player(SDL_Window *window, SDL_Renderer *renderer) {
 
     Player::x = 200;
     Player::y = 150;
+
 }
 
 void Player::updatePlayerPosition(float xDisplacement, float yDisplacement) {
+
     Player::x += xDisplacement;
     Player::y += yDisplacement;
 }
 
-void Player::movePlayerUp() {
-    Player::updatePlayerPosition(0, -PLAYER_SPEED);
+void Player::movePlayerUp(float deltaTime) {
+    Player::updatePlayerPosition(0, -PLAYER_SPEED * deltaTime);
 }
 
-void Player::movePlayerRight() {
-    Player::updatePlayerPosition(PLAYER_SPEED, 0);
+void Player::movePlayerRight(float deltaTime) {
+    Player::updatePlayerPosition(PLAYER_SPEED * deltaTime, 0);
 }
 
-void Player::movePlayerDown() {
-    Player::updatePlayerPosition(0, PLAYER_SPEED);
+void Player::movePlayerDown(float deltaTime) {
+    Player::updatePlayerPosition(0, PLAYER_SPEED * deltaTime);
 }
 
-void Player::movePlayerLeft() {
-    Player::updatePlayerPosition(-PLAYER_SPEED, 0);
+void Player::movePlayerLeft(float deltaTime) {
+    Player::updatePlayerPosition(-PLAYER_SPEED * deltaTime, 0);
 }
 
-void Player::movePlayerUpAndRight() {
+void Player::movePlayerUpAndRight(float deltaTime) {
     Player::updatePlayerPosition(
-        Player::calculateDiagonalSpeed(), 
-        -Player::calculateDiagonalSpeed()
+        Player::calculateDiagonalSpeed() * deltaTime, 
+        -Player::calculateDiagonalSpeed() * deltaTime
     );
 }
 
-void Player::movePlayerDownAndRight() {
+void Player::movePlayerDownAndRight(float deltaTime) {
     Player::updatePlayerPosition(
-        Player::calculateDiagonalSpeed(), 
-        Player::calculateDiagonalSpeed()
+        Player::calculateDiagonalSpeed() * deltaTime, 
+        Player::calculateDiagonalSpeed() * deltaTime
     );
 }
 
-void Player::movePlayerUpAndLeft() {
+void Player::movePlayerUpAndLeft(float deltaTime) {
     Player::updatePlayerPosition(
-        -Player::calculateDiagonalSpeed(), 
-        -Player::calculateDiagonalSpeed()
+        -Player::calculateDiagonalSpeed() * deltaTime, 
+        -Player::calculateDiagonalSpeed() * deltaTime
     );
 }
 
-void Player::movePlayerDownAndLeft() {
+void Player::movePlayerDownAndLeft(float deltaTime) {
     Player::updatePlayerPosition(
-        -Player::calculateDiagonalSpeed(), 
-        Player::calculateDiagonalSpeed()
+        -Player::calculateDiagonalSpeed() * deltaTime, 
+        Player::calculateDiagonalSpeed() * deltaTime
     );
 }
 
@@ -61,8 +63,8 @@ void Player::render() {
     SDL_Rect playerRect;
     playerRect.x = Player::x;
     playerRect.y =  Player::y;
-    playerRect.w = 20;
-    playerRect.h = 20; // TODO: Remove magic number
+    playerRect.w = PLAYER_SIDE_LENGTH;
+    playerRect.h = PLAYER_SIDE_LENGTH;
 
     // std::cout << "rect x and y = " << playerRect.x << " " << playerRect.y << "\n";
 

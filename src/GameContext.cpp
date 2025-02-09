@@ -36,11 +36,11 @@ void GameContext::global_process_input(bool *gameIsRunning, AbstractState **curr
             case SDL_QUIT:
                 *gameIsRunning = false;
                 break;
-            case SDL_KEYUP:
-                if (event.key.keysym.sym == SDLK_ESCAPE) {
-                    *gameIsRunning = false;
-                }
-                break;
+            // case SDL_KEYUP:
+            //     if (event.key.keysym.sym == SDLK_ESCAPE) {
+            //         *gameIsRunning = false;
+            //     }
+            //     break;
             default:
                 (*currState)->process_input(event, currState);
                 break;

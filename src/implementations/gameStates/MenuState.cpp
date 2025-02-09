@@ -5,6 +5,13 @@ MenuState::MenuState(SDL_Window *window, SDL_Renderer *renderer) {
 
     MenuState::renderer = renderer;
     MenuState::player = new Player(window, renderer);       // allocated memory - ensure you free it
+    
+    
+    MenuState::pressedArrow = new bool[4];
+    MenuState::pressedArrow[UP] = false;
+    MenuState::pressedArrow[RIGHT] = false;
+    MenuState::pressedArrow[DOWN] = false;
+    MenuState::pressedArrow[LEFT] = false;
 }
 
 bool MenuState::loadMedia() {
@@ -32,19 +39,42 @@ bool MenuState::loadMedia() {
 void MenuState::process_input(SDL_Event event, AbstractState **state) {
 
     switch (event.type) { 
+        MenuState::lastFrameTime = SDL_GetTicks();
         case SDL_MOUSEBUTTONDOWN:
             MenuState::handleMouseClick(state);
             break;
         case SDL_KEYDOWN:
+
             if (event.key.keysym.sym == SDLK_UP) {
-                MenuState::player->movePlayerUp();
+                // MenuState::player->movePlayerUp();
+                MenuState::pressedArrow[UP] = true;
+
             } else if (event.key.keysym.sym == SDLK_RIGHT) {
-                MenuState::player->movePlayerRight();
+                // MenuState::player->movePlayerRight();
+                MenuState::pressedArrow[RIGHT] = true;
+
             } else if (event.key.keysym.sym == SDLK_DOWN) {
-                MenuState::player->movePlayerDown();
+                // MenuState::player->movePlayerDown();
+                MenuState::pressedArrow[DOWN] = true;
+
             } else if (event.key.keysym.sym == SDLK_LEFT) {
-                MenuState::player->movePlayerLeft();
+                // MenuState::player->movePlayerLeft();
+                MenuState::pressedArrow[LEFT] = true;
+
             }
+            break;
+        case SDL_KEYUP:
+
+            if (event.key.keysym.sym == SDLK_UP) {
+                MenuState::pressedArrow[UP] = false;
+            } else if (event.key.keysym.sym == SDLK_RIGHT) {
+                MenuState::pressedArrow[RIGHT] = false;
+            } else if (event.key.keysym.sym == SDLK_DOWN) {
+                MenuState::pressedArrow[DOWN] = false;
+            } else if (event.key.keysym.sym == SDLK_LEFT) {
+                MenuState::pressedArrow[LEFT] = false;
+            }
+            break;
         default:
             break;
     }
@@ -61,20 +91,41 @@ void MenuState::handleMouseClick(AbstractState **state) {
         int buttonBottomY = buttonTopY + MenuState::startButton->getDRect().h;
 
         if (x >= buttonLeftX && x <= buttonRightX && y >= buttonTopY && y <= buttonBottomY) {
-            std::cout << "Mouse button pressed; " << x << ", "<< y << std::endl;
-            std::cout << "Clicked On The BIG RED BUTTON" << std::endl;
-
             (*state)->transitionState(state, new IntroState(window, renderer));
         }
         
-    } else {
-        std::cout << "Mouse button not pressed; " << SDL_BUTTON(SDL_BUTTON_LEFT) << "   " << SDL_GetMouseState(&x, &y) << std::endl;
     }
 }
 
 void MenuState::update() {
     MenuState::startButton->update();
+    handlePlayerMove();
+
     return;
+}
+
+void MenuState::handlePlayerMove() {
+    float deltaTime = (SDL_GetTicks() - lastFrameTime) / 1000.0f;
+    lastFrameTime = SDL_GetTicks();
+
+    if (MenuState::pressedArrow[UP] && MenuState::pressedArrow[RIGHT]) {
+        std::cout<< "in handlePlayerMove: going to movePlayerUpAndRight\n";
+        MenuState::player->movePlayerUpAndRight(deltaTime);
+    } else if (MenuState::pressedArrow[UP] && MenuState::pressedArrow[LEFT]) {
+        MenuState::player->movePlayerUpAndLeft(deltaTime);
+    } else if (MenuState::pressedArrow[DOWN] && MenuState::pressedArrow[RIGHT]) {
+        MenuState::player->movePlayerDownAndRight(deltaTime);
+    } else if (MenuState::pressedArrow[DOWN] && MenuState::pressedArrow[LEFT]) {
+        MenuState::player->movePlayerDownAndLeft(deltaTime);
+    } else if (MenuState::pressedArrow[UP]) {
+        MenuState::player->movePlayerUp(deltaTime);
+    } else if (MenuState::pressedArrow[RIGHT]) {
+        MenuState::player->movePlayerRight(deltaTime);
+    } else if (MenuState::pressedArrow[DOWN]) {
+        MenuState::player->movePlayerDown(deltaTime);
+    } else if (MenuState::pressedArrow[LEFT]) {
+        MenuState::player->movePlayerLeft(deltaTime);
+    }
 }
 
 void MenuState::render() {
@@ -110,6 +161,7 @@ bool MenuState::onEnter() {
 void MenuState::onExit() {
     MenuState::startButton->destroyButton();
     delete MenuState::player;
+    delete[] MenuState::pressedArrow;
 }
 
 std::string MenuState::getStateID() {
