@@ -27,7 +27,7 @@ bool MenuState::loadMedia() {
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, tempCoverImage);
 
     if (texture == NULL) {
-        std::cout << "Unable to create texture from surface" << SDL_GetError() << std::endl;
+        std::cerr << "Unable to create texture from surface" << SDL_GetError() << std::endl;
     }
 
     SDL_FreeSurface(tempCoverImage);
@@ -109,7 +109,6 @@ void MenuState::handlePlayerMove() {
     lastFrameTime = SDL_GetTicks();
 
     if (MenuState::pressedArrow[UP] && MenuState::pressedArrow[RIGHT]) {
-        std::cout<< "in handlePlayerMove: going to movePlayerUpAndRight\n";
         MenuState::player->movePlayerUpAndRight(deltaTime);
     } else if (MenuState::pressedArrow[UP] && MenuState::pressedArrow[LEFT]) {
         MenuState::player->movePlayerUpAndLeft(deltaTime);
@@ -129,7 +128,6 @@ void MenuState::handlePlayerMove() {
 }
 
 void MenuState::render() {
-    // std::cout << "Rendering MenuState" << std::endl;
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderClear(renderer);
     MenuState::startButton->draw();
