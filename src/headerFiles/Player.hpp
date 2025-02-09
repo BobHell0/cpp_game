@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <cmath>
+#include "constants.hpp"
 #define PLAYER_SPEED 40.0
 #define PLAYER_SIDE_LENGTH 30
 
@@ -19,6 +20,8 @@ public:
     void movePlayerUpAndLeft(float deltaTime);
     void movePlayerDownAndLeft(float deltaTime);
 
+    float getPlayerX();
+    float getPlayerY();
 
 private:
     void updatePlayerPosition(float xDisplacement, float yDisplacement);
