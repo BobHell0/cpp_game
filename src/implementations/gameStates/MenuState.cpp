@@ -17,9 +17,11 @@ MenuState::MenuState(SDL_Window *window, SDL_Renderer *renderer) {
     objDRect.h = 80;
     MenuState::tree = new EnvironmentObject(objDRect, renderer);
     
-    player->listOfObjects = new EnvironmentObject*[1];
-    player->listOfObjects[0] = tree;
-    player->numObjects = 1;
+    EnvironmentObject **list = new EnvironmentObject*[1];
+    list[0] = tree;
+
+    MenuState::allObjs = new AllEnvironmentObjects(list);
+
     MenuState::pressedArrow = new bool[4];
     MenuState::pressedArrow[UP] = false;
     MenuState::pressedArrow[RIGHT] = false;
@@ -123,20 +125,28 @@ void MenuState::handlePlayerMove() {
 
     if (MenuState::pressedArrow[UP] && MenuState::pressedArrow[RIGHT]) {
         MenuState::player->movePlayerUpAndRight(deltaTime);
+        MenuState::allObjs->moveAllObjectsDownAndLeft(deltaTime);
     } else if (MenuState::pressedArrow[UP] && MenuState::pressedArrow[LEFT]) {
         MenuState::player->movePlayerUpAndLeft(deltaTime);
+        MenuState::allObjs->moveAllObjectsDownAndRight(deltaTime);
     } else if (MenuState::pressedArrow[DOWN] && MenuState::pressedArrow[RIGHT]) {
         MenuState::player->movePlayerDownAndRight(deltaTime);
+        MenuState::allObjs->moveAllObjectsUpAndLeft(deltaTime);
     } else if (MenuState::pressedArrow[DOWN] && MenuState::pressedArrow[LEFT]) {
         MenuState::player->movePlayerDownAndLeft(deltaTime);
+        MenuState::allObjs->moveAllObjectsUpAndRight(deltaTime);
     } else if (MenuState::pressedArrow[UP]) {
         MenuState::player->movePlayerUp(deltaTime);
+        MenuState::allObjs->moveAllObjectsDown(deltaTime);
     } else if (MenuState::pressedArrow[RIGHT]) {
         MenuState::player->movePlayerRight(deltaTime);
+        MenuState::allObjs->moveAllObjectsLeft(deltaTime);
     } else if (MenuState::pressedArrow[DOWN]) {
         MenuState::player->movePlayerDown(deltaTime);
+        MenuState::allObjs->moveAllObjectsUp(deltaTime);
     } else if (MenuState::pressedArrow[LEFT]) {
         MenuState::player->movePlayerLeft(deltaTime);
+        MenuState::allObjs->moveAllObjectsRight(deltaTime);
     }
 }
 
@@ -174,6 +184,7 @@ void MenuState::onExit() {
     MenuState::startButton->destroyButton();
     delete MenuState::player;
     delete[] MenuState::pressedArrow;
+    delete allObjs;
 }
 
 std::string MenuState::getStateID() {

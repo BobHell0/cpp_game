@@ -14,7 +14,7 @@ public:
     void render();
 
     bool checkForCollision();
-
+    
     void movePlayerUp(float deltaTime);
     void movePlayerLeft(float deltaTime);
     void movePlayerDown(float deltaTime);
@@ -27,9 +27,6 @@ public:
 
     float getPlayerX();
     float getPlayerY();
-
-    EnvironmentObject **listOfObjects;      // needs to be freed
-    int numObjects;
 
 
 private:

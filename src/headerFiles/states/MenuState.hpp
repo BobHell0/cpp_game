@@ -9,6 +9,7 @@
 #include "../constants.hpp"
 #include "../Player.hpp"
 #include "../EnvironmentObject.hpp"
+#include "../AllEnvironmentObjects.hpp"
 
 enum ARROW_KEYS {
     UP = 0,
@@ -39,10 +40,11 @@ private:
     Button *startButton;
     Player *player;
     EnvironmentObject *tree;
-
+    AllEnvironmentObjects *allObjs;
     bool *pressedArrow;
 
     int lastFrameTime;
+    
 };
 
 #endif // MENUSTATE_HPP
