@@ -8,6 +8,8 @@
 #include "IntroState.hpp"
 #include "../constants.hpp"
 #include "../Player.hpp"
+#include "../EnvironmentObject.hpp"
+#include "../AllEnvironmentObjects.hpp"
 
 enum ARROW_KEYS {
     UP = 0,
@@ -34,12 +36,15 @@ private:
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Texture *coverTexture;
+    
     Button *startButton;
     Player *player;
-
+    EnvironmentObject *tree;
+    AllEnvironmentObjects *allObjs;
     bool *pressedArrow;
 
     int lastFrameTime;
+    
 };
 
 #endif // MENUSTATE_HPP

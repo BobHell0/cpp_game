@@ -3,15 +3,11 @@ Player::Player(SDL_Window *window, SDL_Renderer *renderer) {
     Player::window = window;
     Player::renderer = renderer;
 
-    Player::x = 200;
-    Player::y = 150;
-
+    Player::x = 0;
+    Player::y = 0;
 }
-
-void Player::updatePlayerPosition(float xDisplacement, float yDisplacement) {
-
-    Player::x += xDisplacement;
-    Player::y += yDisplacement;
+bool Player::checkForCollision() {
+    return false;
 }
 
 void Player::movePlayerUp(float deltaTime) {
@@ -61,8 +57,8 @@ void Player::movePlayerDownAndLeft(float deltaTime) {
 
 void Player::render() {
     SDL_Rect playerRect;
-    playerRect.x = Player::x;
-    playerRect.y =  Player::y;
+    playerRect.x = PLAYER_POS_X;
+    playerRect.y = PLAYER_POS_Y;
     playerRect.w = PLAYER_SIDE_LENGTH;
     playerRect.h = PLAYER_SIDE_LENGTH;
 
@@ -70,6 +66,20 @@ void Player::render() {
 
     SDL_SetRenderDrawColor(Player::renderer, 0, 255, 0, 255);
     SDL_RenderFillRect(Player::renderer, &playerRect);
+}
+
+float Player::getPlayerX() {
+    return Player::x;
+}
+
+float Player::getPlayerY() {
+    return Player::y;
+}
+
+void Player::updatePlayerPosition(float xDisplacement, float yDisplacement) {
+
+    Player::x += xDisplacement;
+    Player::y += yDisplacement;
 }
 
 float Player::calculateDiagonalSpeed() {

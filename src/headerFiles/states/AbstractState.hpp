@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
+#include "../AllEnvironmentObjects.hpp"
 
 class AbstractState {
 public:

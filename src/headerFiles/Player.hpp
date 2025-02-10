@@ -1,14 +1,20 @@
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
+
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <cmath>
-#define PLAYER_SPEED 40.0
-#define PLAYER_SIDE_LENGTH 30
+#include "constants.hpp"
+#include "EnvironmentObject.hpp"
 
 class Player {
 public:
     Player(SDL_Window *window, SDL_Renderer *renderer);
 
     void render();
+
+    bool checkForCollision();
+    
     void movePlayerUp(float deltaTime);
     void movePlayerLeft(float deltaTime);
     void movePlayerDown(float deltaTime);
@@ -19,6 +25,9 @@ public:
     void movePlayerUpAndLeft(float deltaTime);
     void movePlayerDownAndLeft(float deltaTime);
 
+    float getPlayerX();
+    float getPlayerY();
+
 
 private:
     void updatePlayerPosition(float xDisplacement, float yDisplacement);
@@ -26,6 +35,9 @@ private:
     SDL_Window *window;
     SDL_Renderer *renderer;
 
+
     float x;
     float y;
 };
+
+#endif
