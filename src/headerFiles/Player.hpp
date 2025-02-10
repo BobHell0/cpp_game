@@ -7,9 +7,6 @@
 #include "constants.hpp"
 #include "EnvironmentObject.hpp"
 
-#define PLAYER_SPEED 40.0
-#define PLAYER_SIDE_LENGTH 30
-
 class Player {
 public:
     Player(SDL_Window *window, SDL_Renderer *renderer);

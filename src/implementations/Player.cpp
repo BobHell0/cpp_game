@@ -90,8 +90,8 @@ void Player::movePlayerDownAndLeft(float deltaTime) {
 
 void Player::render() {
     SDL_Rect playerRect;
-    playerRect.x = WINDOW_WIDTH / 2 - PLAYER_SIDE_LENGTH / 2;
-    playerRect.y = WINDOW_HEIGHT / 2 - PLAYER_SIDE_LENGTH / 2;
+    playerRect.x = PLAYER_POS_X;
+    playerRect.y = PLAYER_POS_Y;
     playerRect.w = PLAYER_SIDE_LENGTH;
     playerRect.h = PLAYER_SIDE_LENGTH;
 

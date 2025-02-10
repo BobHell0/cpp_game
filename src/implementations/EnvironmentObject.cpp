@@ -14,8 +14,8 @@ void EnvironmentObject::render() {
     SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
 
     SDL_FRect objectRect;
-    objectRect.x = EnvironmentObject::x;
-    objectRect.y = EnvironmentObject::y;
+    objectRect.x = EnvironmentObject::x + PLAYER_POS_X;
+    objectRect.y = EnvironmentObject::y + PLAYER_POS_Y;
     objectRect.w = dRect.w;
     objectRect.h = dRect.h;
 

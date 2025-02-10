@@ -9,8 +9,8 @@ MenuState::MenuState(SDL_Window *window, SDL_Renderer *renderer) {
     //x = 300; y= 50 w = 20, h = 80
     // define origin point as where the player is originally spawned
     SDL_FRect objDRect;
-    objDRect.x =  WINDOW_WIDTH / 2 - PLAYER_SIDE_LENGTH / 2 + 100;
-    objDRect.y =  WINDOW_HEIGHT / 2 - PLAYER_SIDE_LENGTH / 2 + 50;
+    objDRect.x =  100;
+    objDRect.y =  50;
 
 
     objDRect.w = 20;
