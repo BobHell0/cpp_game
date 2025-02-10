@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "constants.hpp"
+#include "collisionStrategy/AbstractCollisionStrategy.hpp"
 #include <cmath>
 
 class EnvironmentObject {
@@ -13,7 +14,7 @@ public:
      * dRect.x represents the x distnace between the player's original position and the object
      * dRect.y represents the y distnace between the player's original position and the object
     */
-    EnvironmentObject(SDL_FRect dRect, SDL_Renderer *renderer);
+    EnvironmentObject(SDL_FRect dRect, SDL_Renderer *renderer, AbstractCollisionStrategy *collisionStrategy);
     void render();
 
     bool playerMovesUpCollisionCheck();
@@ -41,6 +42,9 @@ private:
     float calculateDiagonalSpeed();
 
     SDL_Renderer *renderer;
+
+    AbstractCollisionStrategy *collisionStrategy;
+
 
 
 

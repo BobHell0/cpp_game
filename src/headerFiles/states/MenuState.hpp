@@ -10,6 +10,9 @@
 #include "../Player.hpp"
 #include "../EnvironmentObject.hpp"
 #include "../AllEnvironmentObjects.hpp"
+#include "../collisionStrategy/MirageCollisionStrategy.hpp"
+#include "../collisionStrategy/TitaniumCollisionStrategy.hpp"
+
 
 enum ARROW_KEYS {
     UP = 0,
