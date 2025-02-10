@@ -16,7 +16,21 @@ bool AllEnvironmentObjects::playerMovesUpCollisionCheck() {
     return false;
 }
 
+bool AllEnvironmentObjects::playerMovesDownCollisionCheck() {
+    for (int i = 0; i < numberOfObjects; i++) {
+        EnvironmentObject *currObject = listOfObjects[i];
+        if (currObject->playerMovesDownCollisionCheck()) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
 void AllEnvironmentObjects::moveAllObjectsUp(float deltaTime) {
+    if (playerMovesDownCollisionCheck()) {
+        return;
+    }
     for (int i = 0; i < numberOfObjects; i++) {
         EnvironmentObject *currObject = listOfObjects[i];
         currObject->moveObjectUp(deltaTime);

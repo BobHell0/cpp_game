@@ -17,6 +17,7 @@ public:
     void render();
 
     bool playerMovesUpCollisionCheck();
+    bool playerMovesDownCollisionCheck();
 
     void moveObjectUp(float deltaTime);
     void moveObjectLeft(float deltaTime);
