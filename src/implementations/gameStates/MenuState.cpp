@@ -6,7 +6,20 @@ MenuState::MenuState(SDL_Window *window, SDL_Renderer *renderer) {
     MenuState::renderer = renderer;
     MenuState::player = new Player(window, renderer);       // allocated memory - ensure you free it
     
+    //x = 300; y= 50 w = 20, h = 80
+    // define origin point as where the player is originally spawned
+    SDL_FRect objDRect;
+    objDRect.x =  WINDOW_WIDTH / 2 - PLAYER_SIDE_LENGTH / 2 + 100;
+    objDRect.y =  WINDOW_HEIGHT / 2 - PLAYER_SIDE_LENGTH / 2 + 50;
+
+
+    objDRect.w = 20;
+    objDRect.h = 80;
+    MenuState::tree = new EnvironmentObject(objDRect, renderer);
     
+    player->listOfObjects = new EnvironmentObject*[1];
+    player->listOfObjects[0] = tree;
+    player->numObjects = 1;
     MenuState::pressedArrow = new bool[4];
     MenuState::pressedArrow[UP] = false;
     MenuState::pressedArrow[RIGHT] = false;
@@ -132,6 +145,7 @@ void MenuState::render() {
     SDL_RenderClear(renderer);
     MenuState::startButton->draw();
     MenuState::player->render();
+    MenuState::tree->render();
     SDL_RenderPresent(renderer);
 }
 
@@ -148,7 +162,7 @@ bool MenuState::onEnter() {
 
     SDL_Rect sRect = {0, 0, 100, 200};
     SDL_Rect dRect = {150, 200, 100, 50};
-    this->startButton = new Button(renderer, sRect, dRect);
+    MenuState::startButton = new Button(renderer, sRect, dRect);
 
     
     // Update screen

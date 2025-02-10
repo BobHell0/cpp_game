@@ -3,24 +3,44 @@ Player::Player(SDL_Window *window, SDL_Renderer *renderer) {
     Player::window = window;
     Player::renderer = renderer;
 
-    Player::x = WINDOW_WIDTH / 2 - PLAYER_SIDE_LENGTH / 2;
-    Player::y = WINDOW_HEIGHT / 2 - PLAYER_SIDE_LENGTH / 2;
+    Player::x = 0;
+    Player::y = 0;
 }
+bool Player::checkForCollision() {
 
+    return false;
+
+}
 void Player::movePlayerUp(float deltaTime) {
     Player::updatePlayerPosition(0, -PLAYER_SPEED * deltaTime);
+    for (int i = 0; i < numObjects; i++) {
+        EnvironmentObject *currObject = listOfObjects[i];
+        currObject->moveObjectDown(deltaTime);
+    }
 }
 
 void Player::movePlayerRight(float deltaTime) {
     Player::updatePlayerPosition(PLAYER_SPEED * deltaTime, 0);
+    for (int i = 0; i < numObjects; i++) {
+        EnvironmentObject *currObject = listOfObjects[i];
+        currObject->moveObjectLeft(deltaTime);
+    }
 }
 
 void Player::movePlayerDown(float deltaTime) {
     Player::updatePlayerPosition(0, PLAYER_SPEED * deltaTime);
+    for (int i = 0; i < numObjects; i++) {
+        EnvironmentObject *currObject = listOfObjects[i];
+        currObject->moveObjectUp(deltaTime);
+    }
 }
 
 void Player::movePlayerLeft(float deltaTime) {
     Player::updatePlayerPosition(-PLAYER_SPEED * deltaTime, 0);
+    for (int i = 0; i < numObjects; i++) {
+        EnvironmentObject *currObject = listOfObjects[i];
+        currObject->moveObjectRight(deltaTime);
+    }
 }
 
 void Player::movePlayerUpAndRight(float deltaTime) {
@@ -28,6 +48,10 @@ void Player::movePlayerUpAndRight(float deltaTime) {
         Player::calculateDiagonalSpeed() * deltaTime, 
         -Player::calculateDiagonalSpeed() * deltaTime
     );
+    for (int i = 0; i < numObjects; i++) {
+        EnvironmentObject *currObject = listOfObjects[i];
+        currObject->moveObjectDownAndLeft(deltaTime);
+    }
 }
 
 void Player::movePlayerDownAndRight(float deltaTime) {
@@ -35,6 +59,10 @@ void Player::movePlayerDownAndRight(float deltaTime) {
         Player::calculateDiagonalSpeed() * deltaTime, 
         Player::calculateDiagonalSpeed() * deltaTime
     );
+    for (int i = 0; i < numObjects; i++) {
+        EnvironmentObject *currObject = listOfObjects[i];
+        currObject->moveObjectUpAndLeft(deltaTime);
+    }
 }
 
 void Player::movePlayerUpAndLeft(float deltaTime) {
@@ -42,6 +70,10 @@ void Player::movePlayerUpAndLeft(float deltaTime) {
         -Player::calculateDiagonalSpeed() * deltaTime, 
         -Player::calculateDiagonalSpeed() * deltaTime
     );
+    for (int i = 0; i < numObjects; i++) {
+        EnvironmentObject *currObject = listOfObjects[i];
+        currObject->moveObjectDownAndRight(deltaTime);
+    }
 }
 
 void Player::movePlayerDownAndLeft(float deltaTime) {
@@ -49,6 +81,10 @@ void Player::movePlayerDownAndLeft(float deltaTime) {
         -Player::calculateDiagonalSpeed() * deltaTime, 
         Player::calculateDiagonalSpeed() * deltaTime
     );
+    for (int i = 0; i < numObjects; i++) {
+        EnvironmentObject *currObject = listOfObjects[i];
+        currObject->moveObjectUpAndRight(deltaTime);
+    }
 }
 
 

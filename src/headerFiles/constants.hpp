@@ -1,5 +1,7 @@
 #define WINDOW_WIDTH 400
 #define WINDOW_HEIGHT 300
+#define PLAYER_SIDE_LENGTH 30
+#define PLAYER_SPEED 40.0
 
 #define FPS 30
 #define FRAME_TARGET_TIME (1000 / FPS)
