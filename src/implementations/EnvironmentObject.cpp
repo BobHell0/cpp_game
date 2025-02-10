@@ -55,6 +55,38 @@ bool EnvironmentObject::playerMovesDownCollisionCheck() {
 
 }
 
+bool EnvironmentObject::playerMovesLeftCollisionCheck() {
+    float objectTopRightX = EnvironmentObject::x + PLAYER_POS_X + dRect.w;
+    float objectTopRightY = EnvironmentObject::y + PLAYER_POS_Y;
+
+    float objectBottomRightY = EnvironmentObject::y + PLAYER_POS_Y + dRect.h;
+
+    float playerBottomLeftX = PLAYER_POS_X;
+    float playerBottomLeftY = PLAYER_POS_Y + PLAYER_SIDE_LENGTH;
+
+    float playerTopLeftY = PLAYER_POS_Y;
+
+    return (objectTopRightY < playerBottomLeftY) 
+        && (objectBottomRightY > playerTopLeftY) 
+        && (abs(objectTopRightX - playerBottomLeftX) < COLLISION_BUFFER);
+}
+
+bool EnvironmentObject::playerMovesRightCollisionCheck() {
+    float objectTopLeftX = EnvironmentObject::x + PLAYER_POS_X;
+    float objectTopLeftY = EnvironmentObject::y + PLAYER_POS_Y;
+
+    float objectBottomLeftY = EnvironmentObject::y + PLAYER_POS_Y + dRect.h;
+
+    float playerBottomRightX = PLAYER_POS_X + PLAYER_SIDE_LENGTH;
+    float playerBottomRightY = PLAYER_POS_Y + PLAYER_SIDE_LENGTH;
+
+    float playerTopRightY = PLAYER_POS_Y;
+
+    return (objectTopLeftY < playerBottomRightY) 
+        && (objectBottomLeftY > playerTopRightY) 
+        && (abs(objectTopLeftX - playerBottomRightX) < COLLISION_BUFFER);
+}
+
 void EnvironmentObject::moveObjectUp(float deltaTime) {
     EnvironmentObject::updateObjectPosition(0, -PLAYER_SPEED * deltaTime);
 }
