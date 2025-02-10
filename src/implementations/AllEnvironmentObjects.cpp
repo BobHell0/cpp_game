@@ -16,7 +16,43 @@ bool AllEnvironmentObjects::playerMovesUpCollisionCheck() {
     return false;
 }
 
+bool AllEnvironmentObjects::playerMovesDownCollisionCheck() {
+    for (int i = 0; i < numberOfObjects; i++) {
+        EnvironmentObject *currObject = listOfObjects[i];
+        if (currObject->playerMovesDownCollisionCheck()) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+bool AllEnvironmentObjects::playerMovesLeftCollisionCheck() {
+    for (int i = 0; i < numberOfObjects; i++) {
+        EnvironmentObject *currObject = listOfObjects[i];
+        if (currObject->playerMovesLeftCollisionCheck()) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+bool AllEnvironmentObjects::playerMovesRightCollisionCheck() {
+    for (int i = 0; i < numberOfObjects; i++) {
+        EnvironmentObject *currObject = listOfObjects[i];
+        if (currObject->playerMovesRightCollisionCheck()) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
 void AllEnvironmentObjects::moveAllObjectsUp(float deltaTime) {
+    if (playerMovesDownCollisionCheck()) {
+        return;
+    }
     for (int i = 0; i < numberOfObjects; i++) {
         EnvironmentObject *currObject = listOfObjects[i];
         currObject->moveObjectUp(deltaTime);
@@ -24,6 +60,10 @@ void AllEnvironmentObjects::moveAllObjectsUp(float deltaTime) {
 
 }
 void AllEnvironmentObjects::moveAllObjectsRight(float deltaTime) {
+    if (playerMovesLeftCollisionCheck()) {
+        return;
+    }
+
     for (int i = 0; i < numberOfObjects; i++) {
         EnvironmentObject *currObject = listOfObjects[i];
         currObject->moveObjectRight(deltaTime);
@@ -41,6 +81,10 @@ void AllEnvironmentObjects::moveAllObjectsDown(float deltaTime) {
 
 }
 void AllEnvironmentObjects::moveAllObjectsLeft(float deltaTime) {
+    if (playerMovesRightCollisionCheck()) {
+        return;
+    }
+    
     for (int i = 0; i < numberOfObjects; i++) {
         EnvironmentObject *currObject = listOfObjects[i];
         currObject->moveObjectLeft(deltaTime);

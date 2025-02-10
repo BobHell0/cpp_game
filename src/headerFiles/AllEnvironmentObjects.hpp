@@ -8,7 +8,9 @@ public:
     AllEnvironmentObjects(EnvironmentObject **listOfObjects);
 
     bool playerMovesUpCollisionCheck();
-
+    bool playerMovesDownCollisionCheck();
+    bool playerMovesLeftCollisionCheck();
+    bool playerMovesRightCollisionCheck();
 
     void moveAllObjectsUp(float deltaTime);
     void moveAllObjectsRight(float deltaTime);
