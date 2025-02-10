@@ -5,7 +5,16 @@ AllEnvironmentObjects::AllEnvironmentObjects(EnvironmentObject **listOfObjects) 
     numberOfObjects = sizeof(listOfObjects) / sizeof(listOfObjects[0]);
 }
 
-
+bool AllEnvironmentObjects::playerMovesUpCollisionCheck() {
+    for (int i = 0; i < numberOfObjects; i++) {
+        EnvironmentObject *currObject = listOfObjects[i];
+        if (currObject->playerMovesUpCollisionCheck()) {
+            return true;
+        }
+    }
+    
+    return false;
+}
 
 void AllEnvironmentObjects::moveAllObjectsUp(float deltaTime) {
     for (int i = 0; i < numberOfObjects; i++) {
@@ -22,6 +31,9 @@ void AllEnvironmentObjects::moveAllObjectsRight(float deltaTime) {
 
 }
 void AllEnvironmentObjects::moveAllObjectsDown(float deltaTime) {
+    if (playerMovesUpCollisionCheck()) {
+        return; // block movement
+    }
     for (int i = 0; i < numberOfObjects; i++) {
         EnvironmentObject *currObject = listOfObjects[i];
         currObject->moveObjectDown(deltaTime);

@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "constants.hpp"
+#include <cmath>
 
 class EnvironmentObject {
 
@@ -14,6 +15,8 @@ public:
     */
     EnvironmentObject(SDL_FRect dRect, SDL_Renderer *renderer);
     void render();
+
+    bool playerMovesUpCollisionCheck();
 
     void moveObjectUp(float deltaTime);
     void moveObjectLeft(float deltaTime);

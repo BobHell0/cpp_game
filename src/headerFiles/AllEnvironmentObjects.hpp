@@ -7,6 +7,9 @@ class AllEnvironmentObjects {
 public:
     AllEnvironmentObjects(EnvironmentObject **listOfObjects);
 
+    bool playerMovesUpCollisionCheck();
+
+
     void moveAllObjectsUp(float deltaTime);
     void moveAllObjectsRight(float deltaTime);
     void moveAllObjectsDown(float deltaTime);

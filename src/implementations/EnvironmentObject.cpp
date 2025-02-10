@@ -22,6 +22,24 @@ void EnvironmentObject::render() {
     SDL_RenderFillRectF(renderer, &objectRect);
 }
 
+bool EnvironmentObject::playerMovesUpCollisionCheck() {
+    float objectBottomLeftX = EnvironmentObject::x + PLAYER_POS_X;
+    float objectBottomLeftY = EnvironmentObject::y + PLAYER_POS_Y + dRect.h;
+
+    float objectBottomRightX = EnvironmentObject::x + PLAYER_POS_X + dRect.w;
+    // float objectBottomRightY = EnvironmentObject::y + PLAYER_POS_Y + dRect.h;
+
+    float playerTopLeftX = PLAYER_POS_X;
+    float playerTopLeftY = PLAYER_POS_Y;
+
+    float playerTopRightX = PLAYER_POS_X + PLAYER_SIDE_LENGTH;
+    // float playerTopRightY = PLAYER_POS_Y;
+
+    return (objectBottomRightX > playerTopLeftX) 
+        && (objectBottomLeftX < playerTopRightX) 
+        && (abs(objectBottomLeftY - playerTopLeftY) < 5);
+}
+
 void EnvironmentObject::moveObjectUp(float deltaTime) {
     EnvironmentObject::updateObjectPosition(0, -PLAYER_SPEED * deltaTime);
 }
