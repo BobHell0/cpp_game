@@ -15,7 +15,7 @@ MenuState::MenuState(SDL_Window *window, SDL_Renderer *renderer) {
 
     objDRect.w = 20;
     objDRect.h = 80;
-    MenuState::tree = new EnvironmentObject(objDRect, renderer);
+    MenuState::tree = new EnvironmentObject(objDRect, renderer, new TitaniumCollisionStrategy());
     
     EnvironmentObject **list = new EnvironmentObject*[1];
     list[0] = tree;
