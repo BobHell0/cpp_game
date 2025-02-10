@@ -1,13 +1,14 @@
 #include "../headerFiles/EnvironmentObject.hpp"
 EnvironmentObject::EnvironmentObject(
     SDL_FRect dRect, 
-    SDL_Renderer *renderer
+    SDL_Renderer *renderer,
+    AbstractCollisionStrategy *collisionStrategy
 ) {
-
     EnvironmentObject::dRect = dRect;
     EnvironmentObject::renderer = renderer;
     EnvironmentObject::x = dRect.x;
     EnvironmentObject::y = dRect.y;
+    EnvironmentObject::collisionStrategy = collisionStrategy;
 }
 
 void EnvironmentObject::render() {
@@ -23,68 +24,31 @@ void EnvironmentObject::render() {
 }
 
 bool EnvironmentObject::playerMovesUpCollisionCheck() {
-    float objectBottomLeftX = EnvironmentObject::x + PLAYER_POS_X;
-    float objectBottomLeftY = EnvironmentObject::y + PLAYER_POS_Y + dRect.h;
+    ObjectPositionInfo info;
+    info.x = x, info.y = y, info.dRect = dRect;
+    return EnvironmentObject::collisionStrategy->playerMovesUpCollisionCheck(info);
 
-    float objectBottomRightX = EnvironmentObject::x + PLAYER_POS_X + dRect.w;
-
-    float playerTopLeftX = PLAYER_POS_X;
-    float playerTopLeftY = PLAYER_POS_Y;
-
-    float playerTopRightX = PLAYER_POS_X + PLAYER_SIDE_LENGTH;
-
-    return (objectBottomRightX > playerTopLeftX) 
-        && (objectBottomLeftX < playerTopRightX) 
-        && (abs(objectBottomLeftY - playerTopLeftY) < COLLISION_BUFFER);
 }
 
 bool EnvironmentObject::playerMovesDownCollisionCheck() {
-    float objectTopLeftX = EnvironmentObject::x + PLAYER_POS_X;
-    float objectTopLeftY = EnvironmentObject::y + PLAYER_POS_Y;
+    ObjectPositionInfo info;
+    info.x = x, info.y = y, info.dRect = dRect;
+    return EnvironmentObject::collisionStrategy->playerMovesDownCollisionCheck(info);
 
-    float objectTopRightX = EnvironmentObject::x + PLAYER_POS_X + dRect.w;
-
-    float playerBottomLeftX = PLAYER_POS_X;
-    float playerBottomLeftY = PLAYER_POS_Y + PLAYER_SIDE_LENGTH;
-
-    float playerBottomRightX = PLAYER_POS_X + PLAYER_SIDE_LENGTH;
-
-    return (objectTopRightX > playerBottomLeftX) 
-        && (objectTopLeftX < playerBottomRightX) 
-        && (abs(objectTopLeftY - playerBottomLeftY) < COLLISION_BUFFER);
 
 }
 
 bool EnvironmentObject::playerMovesLeftCollisionCheck() {
-    float objectTopRightX = EnvironmentObject::x + PLAYER_POS_X + dRect.w;
-    float objectTopRightY = EnvironmentObject::y + PLAYER_POS_Y;
+    ObjectPositionInfo info;
+    info.x = x, info.y = y, info.dRect = dRect;
+    return EnvironmentObject::collisionStrategy->playerMovesLeftCollisionCheck(info);
 
-    float objectBottomRightY = EnvironmentObject::y + PLAYER_POS_Y + dRect.h;
-
-    float playerBottomLeftX = PLAYER_POS_X;
-    float playerBottomLeftY = PLAYER_POS_Y + PLAYER_SIDE_LENGTH;
-
-    float playerTopLeftY = PLAYER_POS_Y;
-
-    return (objectTopRightY < playerBottomLeftY) 
-        && (objectBottomRightY > playerTopLeftY) 
-        && (abs(objectTopRightX - playerBottomLeftX) < COLLISION_BUFFER);
 }
 
 bool EnvironmentObject::playerMovesRightCollisionCheck() {
-    float objectTopLeftX = EnvironmentObject::x + PLAYER_POS_X;
-    float objectTopLeftY = EnvironmentObject::y + PLAYER_POS_Y;
-
-    float objectBottomLeftY = EnvironmentObject::y + PLAYER_POS_Y + dRect.h;
-
-    float playerBottomRightX = PLAYER_POS_X + PLAYER_SIDE_LENGTH;
-    float playerBottomRightY = PLAYER_POS_Y + PLAYER_SIDE_LENGTH;
-
-    float playerTopRightY = PLAYER_POS_Y;
-
-    return (objectTopLeftY < playerBottomRightY) 
-        && (objectBottomLeftY > playerTopRightY) 
-        && (abs(objectTopLeftX - playerBottomRightX) < COLLISION_BUFFER);
+    ObjectPositionInfo info;
+    info.x = x, info.y = y, info.dRect = dRect;
+    return EnvironmentObject::collisionStrategy->playerMovesRightCollisionCheck(info);
 }
 
 void EnvironmentObject::moveObjectUp(float deltaTime) {

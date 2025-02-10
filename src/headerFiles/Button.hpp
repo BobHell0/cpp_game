@@ -1,7 +1,6 @@
 #ifndef BUTTON_HPP
 #define BUTTON_HPP
 
-#include "./structs/rgba.hpp"
 #include <SDL2/SDL.h>
 #include <iostream>
 
