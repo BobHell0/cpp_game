@@ -23,7 +23,7 @@ enum ARROW_KEYS {
 
 class MenuState : public AbstractState {
 public:
-    MenuState(SDL_Window *window, SDL_Renderer *renderer);
+    MenuState(SDL_Renderer *renderer);
 
     void process_input(SDL_Event event, AbstractState **state);
     void update();
@@ -41,7 +41,7 @@ private:
     SDL_Texture *coverTexture;
     
     Button *startButton;
-    Player *player;
+    Player player;
     EnvironmentObject *tree;
     AllEnvironmentObjects *allObjs;
     bool *pressedArrow;

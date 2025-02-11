@@ -1,10 +1,10 @@
 #include "../../headerFiles/states/MenuState.hpp"
 
 
-MenuState::MenuState(SDL_Window *window, SDL_Renderer *renderer) {
+MenuState::MenuState(SDL_Renderer *renderer) {
 
     MenuState::renderer = renderer;
-    MenuState::player = new Player(window, renderer);       // allocated memory - ensure you free it
+    MenuState::player = Player(renderer);
     
     //x = 300; y= 50 w = 20, h = 80
     // define origin point as where the player is originally spawned
@@ -124,28 +124,28 @@ void MenuState::handlePlayerMove() {
     lastFrameTime = SDL_GetTicks();
 
     if (MenuState::pressedArrow[UP] && MenuState::pressedArrow[RIGHT]) {
-        MenuState::player->movePlayerUpAndRight(deltaTime);
+        MenuState::player.movePlayerUpAndRight(deltaTime);
         MenuState::allObjs->moveAllObjectsDownAndLeft(deltaTime);
     } else if (MenuState::pressedArrow[UP] && MenuState::pressedArrow[LEFT]) {
-        MenuState::player->movePlayerUpAndLeft(deltaTime);
+        MenuState::player.movePlayerUpAndLeft(deltaTime);
         MenuState::allObjs->moveAllObjectsDownAndRight(deltaTime);
     } else if (MenuState::pressedArrow[DOWN] && MenuState::pressedArrow[RIGHT]) {
-        MenuState::player->movePlayerDownAndRight(deltaTime);
+        MenuState::player.movePlayerDownAndRight(deltaTime);
         MenuState::allObjs->moveAllObjectsUpAndLeft(deltaTime);
     } else if (MenuState::pressedArrow[DOWN] && MenuState::pressedArrow[LEFT]) {
-        MenuState::player->movePlayerDownAndLeft(deltaTime);
+        MenuState::player.movePlayerDownAndLeft(deltaTime);
         MenuState::allObjs->moveAllObjectsUpAndRight(deltaTime);
     } else if (MenuState::pressedArrow[UP]) {
-        MenuState::player->movePlayerUp(deltaTime);
+        MenuState::player.movePlayerUp(deltaTime);
         MenuState::allObjs->moveAllObjectsDown(deltaTime);
     } else if (MenuState::pressedArrow[RIGHT]) {
-        MenuState::player->movePlayerRight(deltaTime);
+        MenuState::player.movePlayerRight(deltaTime);
         MenuState::allObjs->moveAllObjectsLeft(deltaTime);
     } else if (MenuState::pressedArrow[DOWN]) {
-        MenuState::player->movePlayerDown(deltaTime);
+        MenuState::player.movePlayerDown(deltaTime);
         MenuState::allObjs->moveAllObjectsUp(deltaTime);
     } else if (MenuState::pressedArrow[LEFT]) {
-        MenuState::player->movePlayerLeft(deltaTime);
+        MenuState::player.movePlayerLeft(deltaTime);
         MenuState::allObjs->moveAllObjectsRight(deltaTime);
     }
 }
@@ -154,7 +154,7 @@ void MenuState::render() {
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderClear(renderer);
     MenuState::startButton->draw();
-    MenuState::player->render();
+    MenuState::player.render();
     MenuState::tree->render();
     SDL_RenderPresent(renderer);
 }
@@ -182,7 +182,6 @@ bool MenuState::onEnter() {
 
 void MenuState::onExit() {
     MenuState::startButton->destroyButton();
-    delete MenuState::player;
     delete[] MenuState::pressedArrow;
     delete allObjs;
 }
