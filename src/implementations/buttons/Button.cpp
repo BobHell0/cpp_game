@@ -1,5 +1,5 @@
 #include "../../headerFiles/Button.hpp"
-
+Button::Button() {}
 Button::Button(SDL_Renderer *renderer, SDL_Rect sRect, SDL_Rect dRect) {
     this->isHovered = false;
     this->renderer = renderer;

@@ -4,7 +4,6 @@
 #include "./states/AbstractState.hpp"
 #include "./constants.hpp"
 #include "./states/MenuState.hpp"
-#include "./states/AbstractState.hpp"
 
 class GameContext {
 private:

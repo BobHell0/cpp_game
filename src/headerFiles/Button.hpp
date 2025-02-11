@@ -12,6 +12,7 @@ class Button {
         bool isHovered;
     
     public:
+        Button();
         Button(SDL_Renderer *renderer, SDL_Rect sRect, SDL_Rect dRect);
 
         void update();

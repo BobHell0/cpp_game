@@ -15,12 +15,15 @@ MenuState::MenuState(SDL_Renderer *renderer) {
 
     objDRect.w = 20;
     objDRect.h = 80;
-    MenuState::tree = new EnvironmentObject(objDRect, renderer, new TitaniumCollisionStrategy());
+    
+    // TitaniumCollisionStrategy strat = ;
+    // std::cout << "Initialised the strat: " << strat.getStratId() << ", with an address of " << &strat << "\n";
+    MenuState::tree = EnvironmentObject(objDRect, renderer, new TitaniumCollisionStrategy());
     
     EnvironmentObject **list = new EnvironmentObject*[1];
-    list[0] = tree;
+    list[0] = &tree;
 
-    MenuState::allObjs = new AllEnvironmentObjects(list);
+    MenuState::allObjs = AllEnvironmentObjects(list);
 
     MenuState::pressedArrow = new bool[4];
     MenuState::pressedArrow[UP] = false;
@@ -99,11 +102,11 @@ void MenuState::process_input(SDL_Event event, AbstractState **state) {
 void MenuState::handleMouseClick(AbstractState **state) {
     int x = 0, y = 0;
     if (SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
-        int buttonLeftX = MenuState::startButton->getDRect().x;
-        int buttonRightX = buttonLeftX + MenuState::startButton->getDRect().w;
+        int buttonLeftX = MenuState::startButton.getDRect().x;
+        int buttonRightX = buttonLeftX + MenuState::startButton.getDRect().w;
 
-        int buttonTopY = MenuState::startButton->getDRect().y;
-        int buttonBottomY = buttonTopY + MenuState::startButton->getDRect().h;
+        int buttonTopY = MenuState::startButton.getDRect().y;
+        int buttonBottomY = buttonTopY + MenuState::startButton.getDRect().h;
 
         if (x >= buttonLeftX && x <= buttonRightX && y >= buttonTopY && y <= buttonBottomY) {
             (*state)->transitionState(state, new IntroState(window, renderer));
@@ -113,7 +116,7 @@ void MenuState::handleMouseClick(AbstractState **state) {
 }
 
 void MenuState::update() {
-    MenuState::startButton->update();
+    MenuState::startButton.update();
     handlePlayerMove();
 
     return;
@@ -125,37 +128,37 @@ void MenuState::handlePlayerMove() {
 
     if (MenuState::pressedArrow[UP] && MenuState::pressedArrow[RIGHT]) {
         MenuState::player.movePlayerUpAndRight(deltaTime);
-        MenuState::allObjs->moveAllObjectsDownAndLeft(deltaTime);
+        MenuState::allObjs.moveAllObjectsDownAndLeft(deltaTime);
     } else if (MenuState::pressedArrow[UP] && MenuState::pressedArrow[LEFT]) {
         MenuState::player.movePlayerUpAndLeft(deltaTime);
-        MenuState::allObjs->moveAllObjectsDownAndRight(deltaTime);
+        MenuState::allObjs.moveAllObjectsDownAndRight(deltaTime);
     } else if (MenuState::pressedArrow[DOWN] && MenuState::pressedArrow[RIGHT]) {
         MenuState::player.movePlayerDownAndRight(deltaTime);
-        MenuState::allObjs->moveAllObjectsUpAndLeft(deltaTime);
+        MenuState::allObjs.moveAllObjectsUpAndLeft(deltaTime);
     } else if (MenuState::pressedArrow[DOWN] && MenuState::pressedArrow[LEFT]) {
         MenuState::player.movePlayerDownAndLeft(deltaTime);
-        MenuState::allObjs->moveAllObjectsUpAndRight(deltaTime);
+        MenuState::allObjs.moveAllObjectsUpAndRight(deltaTime);
     } else if (MenuState::pressedArrow[UP]) {
         MenuState::player.movePlayerUp(deltaTime);
-        MenuState::allObjs->moveAllObjectsDown(deltaTime);
+        MenuState::allObjs.moveAllObjectsDown(deltaTime);
     } else if (MenuState::pressedArrow[RIGHT]) {
         MenuState::player.movePlayerRight(deltaTime);
-        MenuState::allObjs->moveAllObjectsLeft(deltaTime);
+        MenuState::allObjs.moveAllObjectsLeft(deltaTime);
     } else if (MenuState::pressedArrow[DOWN]) {
         MenuState::player.movePlayerDown(deltaTime);
-        MenuState::allObjs->moveAllObjectsUp(deltaTime);
+        MenuState::allObjs.moveAllObjectsUp(deltaTime);
     } else if (MenuState::pressedArrow[LEFT]) {
         MenuState::player.movePlayerLeft(deltaTime);
-        MenuState::allObjs->moveAllObjectsRight(deltaTime);
+        MenuState::allObjs.moveAllObjectsRight(deltaTime);
     }
 }
 
 void MenuState::render() {
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderClear(renderer);
-    MenuState::startButton->draw();
+    MenuState::startButton.draw();
     MenuState::player.render();
-    MenuState::tree->render();
+    MenuState::tree.render();
     SDL_RenderPresent(renderer);
 }
 
@@ -172,7 +175,7 @@ bool MenuState::onEnter() {
 
     SDL_Rect sRect = {0, 0, 100, 200};
     SDL_Rect dRect = {150, 200, 100, 50};
-    MenuState::startButton = new Button(renderer, sRect, dRect);
+    MenuState::startButton = Button(renderer, sRect, dRect);
 
     
     // Update screen
@@ -181,9 +184,8 @@ bool MenuState::onEnter() {
 }
 
 void MenuState::onExit() {
-    MenuState::startButton->destroyButton();
+    MenuState::startButton.destroyButton();
     delete[] MenuState::pressedArrow;
-    delete allObjs;
 }
 
 std::string MenuState::getStateID() {

@@ -64,3 +64,8 @@ bool TitaniumCollisionStrategy::playerMovesRightCollisionCheck(ObjectPositionInf
         && (objectBottomLeftY > playerTopRightY) 
         && (abs(objectTopLeftX - playerBottomRightX) < COLLISION_BUFFER);
 }
+
+std::string TitaniumCollisionStrategy::getStratId()
+{
+    return "Titanium Collision Strategy";
+}

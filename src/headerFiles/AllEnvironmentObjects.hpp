@@ -5,6 +5,7 @@
 
 class AllEnvironmentObjects {
 public:
+    AllEnvironmentObjects();
     AllEnvironmentObjects(EnvironmentObject **listOfObjects);
 
     bool playerMovesUpCollisionCheck();

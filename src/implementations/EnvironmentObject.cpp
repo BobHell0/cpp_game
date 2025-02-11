@@ -1,4 +1,7 @@
 #include "../headerFiles/EnvironmentObject.hpp"
+EnvironmentObject::EnvironmentObject() {
+
+}
 EnvironmentObject::EnvironmentObject(
     SDL_FRect dRect, 
     SDL_Renderer *renderer,
@@ -9,6 +12,7 @@ EnvironmentObject::EnvironmentObject(
     EnvironmentObject::x = dRect.x;
     EnvironmentObject::y = dRect.y;
     EnvironmentObject::collisionStrategy = collisionStrategy;
+
 }
 
 void EnvironmentObject::render() {
@@ -26,6 +30,7 @@ void EnvironmentObject::render() {
 bool EnvironmentObject::playerMovesUpCollisionCheck() {
     ObjectPositionInfo info;
     info.x = x, info.y = y, info.dRect = dRect;
+
     return EnvironmentObject::collisionStrategy->playerMovesUpCollisionCheck(info);
 
 }

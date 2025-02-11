@@ -10,6 +10,7 @@
 class EnvironmentObject {
 
 public:
+    EnvironmentObject();
     /** 
      * dRect.x represents the x distnace between the player's original position and the object
      * dRect.y represents the y distnace between the player's original position and the object

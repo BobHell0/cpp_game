@@ -40,10 +40,10 @@ private:
     SDL_Renderer *renderer;
     SDL_Texture *coverTexture;
     
-    Button *startButton;
+    Button startButton;
     Player player;
-    EnvironmentObject *tree;
-    AllEnvironmentObjects *allObjs;
+    EnvironmentObject tree;
+    AllEnvironmentObjects allObjs;
     bool *pressedArrow;
 
     int lastFrameTime;

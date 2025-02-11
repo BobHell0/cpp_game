@@ -8,6 +8,8 @@ class MirageCollisionStrategy : public AbstractCollisionStrategy {
     bool playerMovesDownCollisionCheck(ObjectPositionInfo info);
     bool playerMovesLeftCollisionCheck(ObjectPositionInfo info);
     bool playerMovesRightCollisionCheck(ObjectPositionInfo info);
+
+    std::string getStratId();
 };
 
 #endif

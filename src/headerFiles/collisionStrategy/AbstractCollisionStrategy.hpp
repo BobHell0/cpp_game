@@ -1,6 +1,7 @@
 #ifndef ABSTRACTCOLLISIONSTRATEGY_HPP
 #define ABSTRACTCOLLISIONSTRATEGY_HPP
 #include <SDL2/SDL.h>
+#include <iostream>
 
 struct ObjectPositionInfo {
     float x;
@@ -14,6 +15,8 @@ public:
     virtual bool playerMovesDownCollisionCheck(ObjectPositionInfo info) = 0;
     virtual bool playerMovesLeftCollisionCheck(ObjectPositionInfo info) = 0;
     virtual bool playerMovesRightCollisionCheck(ObjectPositionInfo info) = 0;
+
+    virtual std::string getStratId() = 0;
 };
 
 #endif

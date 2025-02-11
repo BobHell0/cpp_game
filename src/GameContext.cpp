@@ -70,7 +70,8 @@ int GameContext::launchGame() {
 
     gameIsRunning = GameContext::initialise_window(&window, &renderer);
 
-    GameContext::currState = new MenuState(renderer);
+    MenuState stateInitial = MenuState(renderer);
+    GameContext::currState = &stateInitial;
 
     currState->onEnter();
 

@@ -1,4 +1,7 @@
 #include "../headerFiles/AllEnvironmentObjects.hpp"
+AllEnvironmentObjects::AllEnvironmentObjects() {
+    numberOfObjects = 0;
+}
 
 AllEnvironmentObjects::AllEnvironmentObjects(EnvironmentObject **listOfObjects) {
     AllEnvironmentObjects::listOfObjects = listOfObjects;
