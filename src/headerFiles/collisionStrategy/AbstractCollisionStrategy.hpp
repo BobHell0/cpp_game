@@ -17,6 +17,9 @@ public:
     virtual bool playerMovesRightCollisionCheck(ObjectPositionInfo info) = 0;
 
     virtual std::string getStratId() = 0;
+
+    virtual ~AbstractCollisionStrategy() {};
+
 };
 
 #endif
