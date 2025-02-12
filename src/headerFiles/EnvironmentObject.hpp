@@ -6,6 +6,7 @@
 #include "constants.hpp"
 #include "collisionStrategy/AbstractCollisionStrategy.hpp"
 #include <cmath>
+#include <memory>
 
 class EnvironmentObject {
 
@@ -15,7 +16,7 @@ public:
      * dRect.x represents the x distnace between the player's original position and the object
      * dRect.y represents the y distnace between the player's original position and the object
     */
-    EnvironmentObject(SDL_FRect dRect, SDL_Renderer* renderer, AbstractCollisionStrategy* collisionStrategy);
+    EnvironmentObject(SDL_FRect dRect, SDL_Renderer* renderer, std::shared_ptr<AbstractCollisionStrategy> collisionStrategy);
     void render();
 
     bool playerMovesUpCollisionCheck();
@@ -33,8 +34,6 @@ public:
     void moveObjectUpAndLeft(float deltaTime);
     void moveObjectDownAndLeft(float deltaTime);
 
-    void freeMemory();
-
     float x;
     float y;    // TODO: should be privatised with getters
     SDL_FRect dRect;
@@ -46,7 +45,7 @@ private:
 
     SDL_Renderer* renderer;
 
-    AbstractCollisionStrategy* collisionStrategy;
+    std::shared_ptr<AbstractCollisionStrategy> collisionStrategy;
     
 };
 

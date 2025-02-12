@@ -72,5 +72,6 @@ int GameContext::launchGame() {
     currState->onExit();
 
     destroy_window(window, renderer);
+    delete GameContext::currState;
     return 0;
 }

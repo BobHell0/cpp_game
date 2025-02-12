@@ -1,5 +1,5 @@
 build:
-	g++ -Wall -g \
+	g++ -Wall -std=c++1y -g \
 		-fsanitize=address \
 		./src/implementations/gameStates/*.cpp \
 		./src/implementations/buttons/Button.cpp \

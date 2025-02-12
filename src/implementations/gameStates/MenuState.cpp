@@ -5,16 +5,13 @@ MenuState::MenuState(SDL_Renderer* renderer) {
 
     MenuState::renderer = renderer;
     MenuState::player = Player(renderer);
-    
-    //x = 300; y= 50 w = 20, h = 80
-    // define origin point as where the player is originally spawned
-    // SDL_FRect objDRect = {.x = 100, .y = 50, .w = 20, .h = 80};
 
     EnvironmentObject** objList = new EnvironmentObject*[1];
     objList[0] = new EnvironmentObject(
         (SDL_FRect) {.x = 100, .y = 50, .w = 20, .h = 80}, 
         renderer, 
-        new TitaniumCollisionStrategy()
+        // new TitaniumCollisionStrategy()
+        std::make_shared<TitaniumCollisionStrategy>()
     );
 
     MenuState::allObjs = AllEnvironmentObjects(objList);

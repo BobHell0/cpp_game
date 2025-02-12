@@ -125,7 +125,6 @@ void AllEnvironmentObjects::moveAllObjectsDownAndLeft(float deltaTime) {
 
 void AllEnvironmentObjects::freeMemory() {
     for (int i = 0; i < numberOfObjects; i++) {
-        listOfObjects[i]->freeMemory();
         delete listOfObjects[i];
     }
     delete[] AllEnvironmentObjects::listOfObjects;

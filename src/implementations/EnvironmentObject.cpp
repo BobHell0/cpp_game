@@ -5,14 +5,13 @@ EnvironmentObject::EnvironmentObject() {
 EnvironmentObject::EnvironmentObject(
     SDL_FRect dRect, 
     SDL_Renderer* renderer,
-    AbstractCollisionStrategy* collisionStrategy
+    std::shared_ptr<AbstractCollisionStrategy> collisionStrategy
 ) {
     EnvironmentObject::dRect = dRect;
     EnvironmentObject::renderer = renderer;
     EnvironmentObject::x = dRect.x;
     EnvironmentObject::y = dRect.y;
     EnvironmentObject::collisionStrategy = collisionStrategy;
-
 }
 
 void EnvironmentObject::render() {
@@ -25,6 +24,7 @@ void EnvironmentObject::render() {
     objectRect.h = dRect.h;
 
     SDL_RenderFillRectF(renderer, &objectRect);
+
 }
 
 bool EnvironmentObject::playerMovesUpCollisionCheck() {
@@ -98,10 +98,6 @@ void EnvironmentObject::moveObjectDownAndLeft(float deltaTime) {
         -EnvironmentObject::calculateDiagonalSpeed() * deltaTime, 
         EnvironmentObject::calculateDiagonalSpeed() * deltaTime
     );
-}
-
-void EnvironmentObject::freeMemory() {
-    delete EnvironmentObject::collisionStrategy;
 }
 
 void EnvironmentObject::updateObjectPosition(float xDisplacement, float yDisplacement) {
