@@ -4,8 +4,8 @@ EnvironmentObject::EnvironmentObject() {
 }
 EnvironmentObject::EnvironmentObject(
     SDL_FRect dRect, 
-    SDL_Renderer *renderer,
-    AbstractCollisionStrategy *collisionStrategy
+    SDL_Renderer* renderer,
+    AbstractCollisionStrategy* collisionStrategy
 ) {
     EnvironmentObject::dRect = dRect;
     EnvironmentObject::renderer = renderer;
@@ -28,6 +28,7 @@ void EnvironmentObject::render() {
 }
 
 bool EnvironmentObject::playerMovesUpCollisionCheck() {
+    std::cout << "Hello, it is holger from school\n";
     ObjectPositionInfo info;
     info.x = x, info.y = y, info.dRect = dRect;
 

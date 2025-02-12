@@ -26,7 +26,7 @@ public:
 
     void freeMemory();
 private:
-    EnvironmentObject **listOfObjects; 
+    EnvironmentObject** listOfObjects; 
     int numberOfObjects;
 
 };

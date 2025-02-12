@@ -1,7 +1,7 @@
 #include "../../headerFiles/states/MenuState.hpp"
 
 
-MenuState::MenuState(SDL_Renderer *renderer) {
+MenuState::MenuState(SDL_Renderer* renderer) {
 
     MenuState::renderer = renderer;
     MenuState::player = Player(renderer);
@@ -10,7 +10,7 @@ MenuState::MenuState(SDL_Renderer *renderer) {
     // define origin point as where the player is originally spawned
     SDL_FRect objDRect = {.x = 100, .y = 50, .w = 20, .h = 80};
 
-    EnvironmentObject **objList = new EnvironmentObject*[1];
+    EnvironmentObject** objList = new EnvironmentObject*[1];
     objList[0] = new EnvironmentObject(objDRect, renderer, new TitaniumCollisionStrategy());
     std::cout << "created the objList in the menu state: address is" << objList << "\n";
     MenuState::allObjs = AllEnvironmentObjects(objList);
@@ -18,7 +18,7 @@ MenuState::MenuState(SDL_Renderer *renderer) {
 }
 
 bool MenuState::loadMedia() {
-    SDL_Surface *tempCoverImage = SDL_LoadBMP("./src/images/coolCover.bmp");
+    SDL_Surface* tempCoverImage = SDL_LoadBMP("./src/images/coolCover.bmp");
     if (tempCoverImage == NULL) {
         std::cerr << "Unable to load image" << SDL_GetError() << std::endl;
         return false;
@@ -27,7 +27,7 @@ bool MenuState::loadMedia() {
     std::cout << "Image loaded successfully" << std::endl;
 
 
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, tempCoverImage);
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, tempCoverImage);
 
     if (texture == NULL) {
         std::cerr << "Unable to create texture from surface" << SDL_GetError() << std::endl;

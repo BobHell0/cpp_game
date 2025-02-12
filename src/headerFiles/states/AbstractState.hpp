@@ -18,7 +18,7 @@ public:
      * currState refers to the address of the currState pointer stored in gameContext instance
      * newState is a pointer to the new state
      */
-    void transitionState(AbstractState*& currState, AbstractState *newState);
+    void transitionState(AbstractState*& currState, AbstractState* newState);
 
     virtual ~AbstractState() {};
 };

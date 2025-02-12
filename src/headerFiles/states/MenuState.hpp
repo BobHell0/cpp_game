@@ -25,7 +25,7 @@ enum ARROW_KEYS {
 
 class MenuState : public AbstractState {
 public:
-    MenuState(SDL_Renderer *renderer);
+    MenuState(SDL_Renderer* renderer);
 
     void process_input(SDL_Event event, AbstractState*& state);
     void update();
@@ -38,8 +38,8 @@ private:
     bool loadMedia();
     void handleMouseClick(AbstractState*& state);
     void handlePlayerMove();
-    SDL_Renderer *renderer;
-    SDL_Texture *coverTexture;
+    SDL_Renderer* renderer;
+    SDL_Texture* coverTexture;
     
     Button startButton;
     Player player;

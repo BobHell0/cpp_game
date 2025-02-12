@@ -4,7 +4,7 @@ Player::Player() {
     Player::y = 0;
 }
 
-Player::Player(SDL_Renderer *renderer) {
+Player::Player(SDL_Renderer* renderer) {
     Player::renderer = renderer;
 
     Player::x = 0;

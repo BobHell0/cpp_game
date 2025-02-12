@@ -7,7 +7,7 @@
 
 class IntroState : public AbstractState {
 public:
-    IntroState(SDL_Renderer *renderer);
+    IntroState(SDL_Renderer* renderer);
     void process_input(SDL_Event event, AbstractState*& state);
     void update();
     void render();
@@ -15,7 +15,7 @@ public:
     void onExit();
     std::string getStateID();
 private:
-    SDL_Renderer *renderer;
+    SDL_Renderer* renderer;
 };
 
 #endif

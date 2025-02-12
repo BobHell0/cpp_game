@@ -10,7 +10,7 @@
 class Player {
 public:
     Player();
-    Player(SDL_Renderer *renderer);
+    Player(SDL_Renderer* renderer);
 
     void render();
 
@@ -33,7 +33,7 @@ public:
 private:
     void updatePlayerPosition(float xDisplacement, float yDisplacement);
     float calculateDiagonalSpeed();
-    SDL_Renderer *renderer;
+    SDL_Renderer* renderer;
 
 
     float x;

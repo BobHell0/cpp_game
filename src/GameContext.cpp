@@ -43,14 +43,7 @@ void GameContext::global_process_input(bool& gameIsRunning, AbstractState*& curr
     }
 }
 
-
-void GameContext::update(int *lastFrameTime) {
-    // float delta_time = (SDL_GetTicks() - *lastFrameTime) / 1000.0f;
-    
-    *lastFrameTime = SDL_GetTicks(); // Set the lastFrameTime to the current time.
-}
-
-void GameContext::destroy_window(SDL_Window *window, SDL_Renderer *renderer) {
+void GameContext::destroy_window(SDL_Window* window, SDL_Renderer* renderer) {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
@@ -58,8 +51,8 @@ void GameContext::destroy_window(SDL_Window *window, SDL_Renderer *renderer) {
 
 int GameContext::launchGame() {
     // variables required for basic SDL setup and loop
-    SDL_Window *window = NULL;
-    SDL_Renderer *renderer = NULL;
+    SDL_Window* window = NULL;
+    SDL_Renderer* renderer = NULL;
     bool gameIsRunning = false;
     // int lastFrameTime = 0;
 
