@@ -38,7 +38,6 @@ private:
     bool loadMedia();
     void handleMouseClick(AbstractState*& state);
     void handlePlayerMove();
-    SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Texture *coverTexture;
     

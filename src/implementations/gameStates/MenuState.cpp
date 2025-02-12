@@ -94,7 +94,7 @@ void MenuState::handleMouseClick(AbstractState*& state) {
         int buttonBottomY = buttonTopY + MenuState::startButton.getDRect().h;
 
         if (x >= buttonLeftX && x <= buttonRightX && y >= buttonTopY && y <= buttonBottomY) {
-            state->transitionState(state, new IntroState(window, renderer));
+            state->transitionState(state, new IntroState(renderer));
         }
         
     }
