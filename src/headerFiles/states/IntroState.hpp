@@ -8,7 +8,7 @@
 class IntroState : public AbstractState {
 public:
     IntroState(SDL_Renderer* renderer);
-    void process_input(SDL_Event event, AbstractState*& state);
+    void process_input(SDL_Event event, std::unique_ptr<AbstractState>& state);
     void update();
     void render();
     bool onEnter();

@@ -4,7 +4,7 @@ IntroState::IntroState(SDL_Renderer* renderer) {
     IntroState::renderer = renderer;
 }
 
-void IntroState::process_input(SDL_Event event, AbstractState*& state)
+void IntroState::process_input(SDL_Event event, std::unique_ptr<AbstractState>& state)
 {
 }
 

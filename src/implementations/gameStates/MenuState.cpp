@@ -40,7 +40,7 @@ bool MenuState::loadMedia() {
     return true;
 }
 
-void MenuState::process_input(SDL_Event event, AbstractState*& state) {
+void MenuState::process_input(SDL_Event event, std::unique_ptr<AbstractState>& state) {
 
     switch (event.type) { 
         MenuState::lastFrameTime = SDL_GetTicks();
@@ -85,7 +85,7 @@ void MenuState::process_input(SDL_Event event, AbstractState*& state) {
 
 }
 
-void MenuState::handleMouseClick(AbstractState*& state) {
+void MenuState::handleMouseClick(std::unique_ptr<AbstractState>& state) {
     int x = 0, y = 0;
     if (SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
         int buttonLeftX = MenuState::startButton.getDRect().x;
@@ -95,7 +95,8 @@ void MenuState::handleMouseClick(AbstractState*& state) {
         int buttonBottomY = buttonTopY + MenuState::startButton.getDRect().h;
 
         if (x >= buttonLeftX && x <= buttonRightX && y >= buttonTopY && y <= buttonBottomY) {
-            state->transitionState(state, new IntroState(renderer));
+            
+            state->transitionState(state, std::make_unique<IntroState>(renderer));
         }
         
     }

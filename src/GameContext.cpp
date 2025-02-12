@@ -29,7 +29,7 @@ bool GameContext::initialise_window(SDL_Window*& window, SDL_Renderer*& renderer
     return true;
 }
 
-void GameContext::global_process_input(bool& gameIsRunning, AbstractState*& currState) {
+void GameContext::global_process_input(bool& gameIsRunning, std::unique_ptr<AbstractState>& currState) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
@@ -59,7 +59,7 @@ int GameContext::launchGame() {
     gameIsRunning = GameContext::initialise_window(window, renderer);
 
 
-    GameContext::currState = new MenuState(renderer);
+    GameContext::currState = std::make_unique<MenuState>(renderer);
 
     currState->onEnter();
 
@@ -72,6 +72,6 @@ int GameContext::launchGame() {
     currState->onExit();
 
     destroy_window(window, renderer);
-    delete GameContext::currState;
+    // delete GameContext::currState;
     return 0;
 }
