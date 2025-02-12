@@ -3,9 +3,16 @@ AllEnvironmentObjects::AllEnvironmentObjects() {
     numberOfObjects = 0;
 }
 
-AllEnvironmentObjects::AllEnvironmentObjects(EnvironmentObject **listOfObjects) {
+AllEnvironmentObjects::AllEnvironmentObjects(EnvironmentObject** listOfObjects) {
     AllEnvironmentObjects::listOfObjects = listOfObjects;
     numberOfObjects = sizeof(listOfObjects) / sizeof(listOfObjects[0]);
+}
+
+void AllEnvironmentObjects::renderAllObjects() {
+    for (int i = 0; i < numberOfObjects; i++) {
+        EnvironmentObject *currObject = listOfObjects[i];
+        currObject->render();
+    }
 }
 
 bool AllEnvironmentObjects::playerMovesUpCollisionCheck() {
@@ -114,4 +121,12 @@ void AllEnvironmentObjects::moveAllObjectsDownAndLeft(float deltaTime) {
     moveAllObjectsDown(deltaTime);
     moveAllObjectsLeft(deltaTime);
 
+}
+
+void AllEnvironmentObjects::freeMemory() {
+    std::cout << "Deleting the all objects array\n";
+    for (int i = 0; i < numberOfObjects; i++) {
+        delete listOfObjects[i];
+    }
+    delete[] AllEnvironmentObjects::listOfObjects;
 }
