@@ -27,7 +27,7 @@ class MenuState : public AbstractState {
 public:
     MenuState(SDL_Renderer *renderer);
 
-    void process_input(SDL_Event event, AbstractState **state);
+    void process_input(SDL_Event event, AbstractState*& state);
     void update();
     void render();
     bool onEnter();
@@ -36,7 +36,7 @@ public:
 
 private:
     bool loadMedia();
-    void handleMouseClick(AbstractState **state);
+    void handleMouseClick(AbstractState*& state);
     void handlePlayerMove();
     SDL_Window *window;
     SDL_Renderer *renderer;

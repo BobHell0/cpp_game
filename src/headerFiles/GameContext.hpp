@@ -7,8 +7,8 @@
 
 class GameContext {
 private:
-    bool initialise_window(SDL_Window **window, SDL_Renderer **renderer);
-    void global_process_input(bool *gameIsRunning, AbstractState **state);
+    bool initialise_window(SDL_Window*& window, SDL_Renderer*& renderer);
+    void global_process_input(bool& gameIsRunning, AbstractState*& state);
     void update(int *lastFrameTime);
     void destroy_window(SDL_Window *window, SDL_Renderer *renderer);
 
