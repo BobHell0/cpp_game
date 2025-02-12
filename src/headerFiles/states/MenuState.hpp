@@ -12,6 +12,8 @@
 #include "../AllEnvironmentObjects.hpp"
 #include "../collisionStrategy/MirageCollisionStrategy.hpp"
 #include "../collisionStrategy/TitaniumCollisionStrategy.hpp"
+#include <array>
+#include <memory>
 
 
 enum ARROW_KEYS {
@@ -42,9 +44,9 @@ private:
     
     Button startButton;
     Player player;
-    EnvironmentObject tree;
+
     AllEnvironmentObjects allObjs;
-    bool *pressedArrow;
+    std::array<bool, 4> pressedArrow;
 
     int lastFrameTime;
     

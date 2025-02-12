@@ -6,7 +6,9 @@
 class AllEnvironmentObjects {
 public:
     AllEnvironmentObjects();
-    AllEnvironmentObjects(EnvironmentObject **listOfObjects);
+    AllEnvironmentObjects(EnvironmentObject** listOfObjects);
+
+    void renderAllObjects();
 
     bool playerMovesUpCollisionCheck();
     bool playerMovesDownCollisionCheck();
@@ -21,6 +23,8 @@ public:
     void moveAllObjectsUpAndLeft(float deltaTime);
     void moveAllObjectsDownAndRight(float deltaTime);
     void moveAllObjectsDownAndLeft(float deltaTime);
+
+    void freeMemory();
 private:
     EnvironmentObject **listOfObjects; 
     int numberOfObjects;
