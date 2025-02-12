@@ -33,6 +33,8 @@ public:
     void moveObjectUpAndLeft(float deltaTime);
     void moveObjectDownAndLeft(float deltaTime);
 
+    void freeMemory();
+
     float x;
     float y;    // TODO: should be privatised with getters
     SDL_FRect dRect;
@@ -45,11 +47,6 @@ private:
     SDL_Renderer* renderer;
 
     AbstractCollisionStrategy* collisionStrategy;
-
-
-
-
-
     
 };
 
