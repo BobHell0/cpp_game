@@ -8,28 +8,13 @@ MenuState::MenuState(SDL_Renderer *renderer) {
     
     //x = 300; y= 50 w = 20, h = 80
     // define origin point as where the player is originally spawned
-    SDL_FRect objDRect;
-    objDRect.x =  100;
-    objDRect.y =  50;
+    SDL_FRect objDRect = {.x = 100, .y = 50, .w = 20, .h = 80};
 
-
-    objDRect.w = 20;
-    objDRect.h = 80;
-    
-    // TitaniumCollisionStrategy strat = ;
-    // std::cout << "Initialised the strat: " << strat.getStratId() << ", with an address of " << &strat << "\n";
-    MenuState::tree = EnvironmentObject(objDRect, renderer, new TitaniumCollisionStrategy());
-    
-    EnvironmentObject **list = new EnvironmentObject*[1];
-    list[0] = &tree;
-
-    MenuState::allObjs = AllEnvironmentObjects(list);
-
-    MenuState::pressedArrow = new bool[4];
-    MenuState::pressedArrow[UP] = false;
-    MenuState::pressedArrow[RIGHT] = false;
-    MenuState::pressedArrow[DOWN] = false;
-    MenuState::pressedArrow[LEFT] = false;
+    EnvironmentObject **objList = new EnvironmentObject*[1];
+    objList[0] = new EnvironmentObject(objDRect, renderer, new TitaniumCollisionStrategy());
+    std::cout << "created the objList in the menu state: address is" << objList << "\n";
+    MenuState::allObjs = AllEnvironmentObjects(objList);
+    pressedArrow.fill(false);
 }
 
 bool MenuState::loadMedia() {
@@ -158,7 +143,7 @@ void MenuState::render() {
     SDL_RenderClear(renderer);
     MenuState::startButton.draw();
     MenuState::player.render();
-    MenuState::tree.render();
+    MenuState::allObjs.renderAllObjects();
     SDL_RenderPresent(renderer);
 }
 
@@ -185,7 +170,7 @@ bool MenuState::onEnter() {
 
 void MenuState::onExit() {
     MenuState::startButton.destroyButton();
-    delete[] MenuState::pressedArrow;
+    MenuState::allObjs.freeMemory();
 }
 
 std::string MenuState::getStateID() {
