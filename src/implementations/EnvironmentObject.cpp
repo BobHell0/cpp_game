@@ -28,7 +28,6 @@ void EnvironmentObject::render() {
 }
 
 bool EnvironmentObject::playerMovesUpCollisionCheck() {
-    std::cout << "Hello, it is holger from school\n";
     ObjectPositionInfo info;
     info.x = x, info.y = y, info.dRect = dRect;
 
@@ -99,6 +98,10 @@ void EnvironmentObject::moveObjectDownAndLeft(float deltaTime) {
         -EnvironmentObject::calculateDiagonalSpeed() * deltaTime, 
         EnvironmentObject::calculateDiagonalSpeed() * deltaTime
     );
+}
+
+void EnvironmentObject::freeMemory() {
+    delete EnvironmentObject::collisionStrategy;
 }
 
 void EnvironmentObject::updateObjectPosition(float xDisplacement, float yDisplacement) {
