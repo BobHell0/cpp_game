@@ -124,8 +124,8 @@ void AllEnvironmentObjects::moveAllObjectsDownAndLeft(float deltaTime) {
 }
 
 void AllEnvironmentObjects::freeMemory() {
-    std::cout << "Deleting the all objects array\n";
     for (int i = 0; i < numberOfObjects; i++) {
+        listOfObjects[i]->freeMemory();
         delete listOfObjects[i];
     }
     delete[] AllEnvironmentObjects::listOfObjects;
