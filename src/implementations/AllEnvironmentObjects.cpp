@@ -3,9 +3,10 @@ AllEnvironmentObjects::AllEnvironmentObjects() {
     numberOfObjects = 0;
 }
 
-AllEnvironmentObjects::AllEnvironmentObjects(EnvironmentObject** listOfObjects) {
+AllEnvironmentObjects::AllEnvironmentObjects(EnvironmentObject** listOfObjects, int numObjects) {
     AllEnvironmentObjects::listOfObjects = listOfObjects;
-    numberOfObjects = sizeof(listOfObjects) / sizeof(listOfObjects[0]);
+    // numberOfObjects = sizeof(listOfObjects) / sizeof(listOfObjects[0]);
+    numberOfObjects = numObjects;
 }
 
 void AllEnvironmentObjects::renderAllObjects() {

@@ -6,15 +6,69 @@ MenuState::MenuState(SDL_Renderer* renderer) {
     MenuState::renderer = renderer;
     MenuState::player = Player(renderer);
 
-    EnvironmentObject** objList = new EnvironmentObject*[1];
+    EnvironmentObject** objList = new EnvironmentObject*[10];
     objList[0] = new EnvironmentObject(
         (SDL_FRect) {.x = 100, .y = 50, .w = 20, .h = 80}, 
         renderer, 
         // new TitaniumCollisionStrategy()
         std::make_shared<TitaniumCollisionStrategy>()
     );
+    objList[1] = new EnvironmentObject(
+        (SDL_FRect) {.x = 20, .y = 80, .w = 100, .h = 10}, 
+        renderer, 
+        // new TitaniumCollisionStrategy()
+        std::make_shared<TitaniumCollisionStrategy>()
+    );
+    objList[2] = new EnvironmentObject(
+        (SDL_FRect) {.x = 30, .y = 15, .w = 10, .h = 80}, 
+        renderer, 
+        // new TitaniumCollisionStrategy()
+        std::make_shared<TitaniumCollisionStrategy>()
+    );
+    objList[3] = new EnvironmentObject(
+        (SDL_FRect) {.x = -500, .y = 30, .w = 20, .h = 10}, 
+        renderer, 
+        // new TitaniumCollisionStrategy()
+        std::make_shared<TitaniumCollisionStrategy>()
+    );
+    objList[4] = new EnvironmentObject(
+        (SDL_FRect) {.x = 30, .y = -100, .w = 60, .h = 20}, 
+        renderer, 
+        // new TitaniumCollisionStrategy()
+        std::make_shared<TitaniumCollisionStrategy>()
+    );
+    objList[5] = new EnvironmentObject(
+        (SDL_FRect) {.x = 50, .y = -20, .w = 10, .h = 100}, 
+        renderer, 
+        // new TitaniumCollisionStrategy()
+        std::make_shared<TitaniumCollisionStrategy>()
+    );
+    objList[6] = new EnvironmentObject(
+        (SDL_FRect) {.x = 340, .y = 32, .w = 42, .h = 53}, 
+        renderer, 
+        // new TitaniumCollisionStrategy()
+        std::make_shared<TitaniumCollisionStrategy>()
+    );
+    objList[7] = new EnvironmentObject(
+        (SDL_FRect) {.x = -333, .y = -444, .w = 21, .h = 80}, 
+        renderer, 
+        // new TitaniumCollisionStrategy()
+        std::make_shared<TitaniumCollisionStrategy>()
+    );
+    objList[8] = new EnvironmentObject(
+        (SDL_FRect) {.x = 33, .y = 222, .w = 43, .h = 43}, 
+        renderer, 
+        // new TitaniumCollisionStrategy()
+        std::make_shared<TitaniumCollisionStrategy>()
+    );
+    objList[9] = new EnvironmentObject(
+        (SDL_FRect) {.x = 323, .y = 42, .w = 22, .h = 33}, 
+        renderer, 
+        // new TitaniumCollisionStrategy()
+        std::make_shared<TitaniumCollisionStrategy>()
+    );
 
-    MenuState::allObjs = AllEnvironmentObjects(objList);
+    MenuState::allObjs = AllEnvironmentObjects(objList, 10);
     pressedArrow.fill(false);
 }
 
@@ -95,7 +149,7 @@ void MenuState::handleMouseClick(std::unique_ptr<AbstractState>& state) {
         int buttonBottomY = buttonTopY + MenuState::startButton.getDRect().h;
 
         if (x >= buttonLeftX && x <= buttonRightX && y >= buttonTopY && y <= buttonBottomY) {
-            
+
             state->transitionState(state, std::make_unique<IntroState>(renderer));
         }
         
@@ -104,7 +158,7 @@ void MenuState::handleMouseClick(std::unique_ptr<AbstractState>& state) {
 
 void MenuState::update() {
     MenuState::startButton.update();
-    handlePlayerMove();
+    MenuState::handlePlayerMove();
 
     return;
 }

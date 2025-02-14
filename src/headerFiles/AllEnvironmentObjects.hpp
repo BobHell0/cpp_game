@@ -6,7 +6,7 @@
 class AllEnvironmentObjects {
 public:
     AllEnvironmentObjects();
-    AllEnvironmentObjects(EnvironmentObject** listOfObjects);
+    AllEnvironmentObjects(EnvironmentObject** listOfObjects, int numObjects);
 
     void renderAllObjects();
 
