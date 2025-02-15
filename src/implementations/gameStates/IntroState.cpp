@@ -1,11 +1,10 @@
 #include "../../headerFiles/states/IntroState.hpp"
 
-IntroState::IntroState(SDL_Window *window, SDL_Renderer *renderer) {
-    IntroState::window = window;
+IntroState::IntroState(SDL_Renderer* renderer) {
     IntroState::renderer = renderer;
 }
 
-void IntroState::process_input(SDL_Event event, AbstractState **state)
+void IntroState::process_input(SDL_Event event, std::unique_ptr<AbstractState>& state)
 {
 }
 

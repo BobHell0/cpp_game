@@ -1,6 +1,10 @@
 #include "../headerFiles/Player.hpp"
-Player::Player(SDL_Window *window, SDL_Renderer *renderer) {
-    Player::window = window;
+Player::Player() {
+    Player::x = 0;
+    Player::y = 0;
+}
+
+Player::Player(SDL_Renderer* renderer) {
     Player::renderer = renderer;
 
     Player::x = 0;

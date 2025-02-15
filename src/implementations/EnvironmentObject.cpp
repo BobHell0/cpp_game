@@ -1,8 +1,11 @@
 #include "../headerFiles/EnvironmentObject.hpp"
+EnvironmentObject::EnvironmentObject() {
+
+}
 EnvironmentObject::EnvironmentObject(
     SDL_FRect dRect, 
-    SDL_Renderer *renderer,
-    AbstractCollisionStrategy *collisionStrategy
+    SDL_Renderer* renderer,
+    std::shared_ptr<AbstractCollisionStrategy> collisionStrategy
 ) {
     EnvironmentObject::dRect = dRect;
     EnvironmentObject::renderer = renderer;
@@ -21,11 +24,13 @@ void EnvironmentObject::render() {
     objectRect.h = dRect.h;
 
     SDL_RenderFillRectF(renderer, &objectRect);
+
 }
 
 bool EnvironmentObject::playerMovesUpCollisionCheck() {
     ObjectPositionInfo info;
     info.x = x, info.y = y, info.dRect = dRect;
+
     return EnvironmentObject::collisionStrategy->playerMovesUpCollisionCheck(info);
 
 }

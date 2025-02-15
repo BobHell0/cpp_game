@@ -11,3 +11,7 @@ bool MirageCollisionStrategy::playerMovesLeftCollisionCheck(ObjectPositionInfo i
 bool MirageCollisionStrategy::playerMovesRightCollisionCheck(ObjectPositionInfo info) {
     return false;
 }
+
+std::string MirageCollisionStrategy::getStratId() {
+    return "Mirage Collision Strategy";
+}

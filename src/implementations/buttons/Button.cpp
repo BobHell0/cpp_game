@@ -1,9 +1,9 @@
 #include "../../headerFiles/Button.hpp"
-
-Button::Button(SDL_Renderer *renderer, SDL_Rect sRect, SDL_Rect dRect) {
+Button::Button() {}
+Button::Button(SDL_Renderer* renderer, SDL_Rect sRect, SDL_Rect dRect) {
     this->isHovered = false;
     this->renderer = renderer;
-    SDL_Surface *tempCoverImage = SDL_LoadBMP("./src/images/coolCover.bmp");
+    SDL_Surface* tempCoverImage = SDL_LoadBMP("./src/images/coolCover.bmp");
     if (tempCoverImage == NULL) {
         std::cerr << "Unable to load image" << SDL_GetError() << std::endl;
         return;

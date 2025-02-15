@@ -1,13 +1,24 @@
 #include "../headerFiles/AllEnvironmentObjects.hpp"
+AllEnvironmentObjects::AllEnvironmentObjects() {
+    numberOfObjects = 0;
+}
 
-AllEnvironmentObjects::AllEnvironmentObjects(EnvironmentObject **listOfObjects) {
+AllEnvironmentObjects::AllEnvironmentObjects(EnvironmentObject** listOfObjects, int numObjects) {
     AllEnvironmentObjects::listOfObjects = listOfObjects;
-    numberOfObjects = sizeof(listOfObjects) / sizeof(listOfObjects[0]);
+    // numberOfObjects = sizeof(listOfObjects) / sizeof(listOfObjects[0]);
+    numberOfObjects = numObjects;
+}
+
+void AllEnvironmentObjects::renderAllObjects() {
+    for (int i = 0; i < numberOfObjects; i++) {
+        EnvironmentObject* currObject = listOfObjects[i];
+        currObject->render();
+    }
 }
 
 bool AllEnvironmentObjects::playerMovesUpCollisionCheck() {
     for (int i = 0; i < numberOfObjects; i++) {
-        EnvironmentObject *currObject = listOfObjects[i];
+        EnvironmentObject* currObject = listOfObjects[i];
         if (currObject->playerMovesUpCollisionCheck()) {
             return true;
         }
@@ -18,7 +29,7 @@ bool AllEnvironmentObjects::playerMovesUpCollisionCheck() {
 
 bool AllEnvironmentObjects::playerMovesDownCollisionCheck() {
     for (int i = 0; i < numberOfObjects; i++) {
-        EnvironmentObject *currObject = listOfObjects[i];
+        EnvironmentObject* currObject = listOfObjects[i];
         if (currObject->playerMovesDownCollisionCheck()) {
             return true;
         }
@@ -29,7 +40,7 @@ bool AllEnvironmentObjects::playerMovesDownCollisionCheck() {
 
 bool AllEnvironmentObjects::playerMovesLeftCollisionCheck() {
     for (int i = 0; i < numberOfObjects; i++) {
-        EnvironmentObject *currObject = listOfObjects[i];
+        EnvironmentObject* currObject = listOfObjects[i];
         if (currObject->playerMovesLeftCollisionCheck()) {
             return true;
         }
@@ -40,7 +51,7 @@ bool AllEnvironmentObjects::playerMovesLeftCollisionCheck() {
 
 bool AllEnvironmentObjects::playerMovesRightCollisionCheck() {
     for (int i = 0; i < numberOfObjects; i++) {
-        EnvironmentObject *currObject = listOfObjects[i];
+        EnvironmentObject* currObject = listOfObjects[i];
         if (currObject->playerMovesRightCollisionCheck()) {
             return true;
         }
@@ -54,7 +65,7 @@ void AllEnvironmentObjects::moveAllObjectsUp(float deltaTime) {
         return;
     }
     for (int i = 0; i < numberOfObjects; i++) {
-        EnvironmentObject *currObject = listOfObjects[i];
+        EnvironmentObject* currObject = listOfObjects[i];
         currObject->moveObjectUp(deltaTime);
     }
 
@@ -65,7 +76,7 @@ void AllEnvironmentObjects::moveAllObjectsRight(float deltaTime) {
     }
 
     for (int i = 0; i < numberOfObjects; i++) {
-        EnvironmentObject *currObject = listOfObjects[i];
+        EnvironmentObject* currObject = listOfObjects[i];
         currObject->moveObjectRight(deltaTime);
     }
 
@@ -75,7 +86,7 @@ void AllEnvironmentObjects::moveAllObjectsDown(float deltaTime) {
         return; // block movement
     }
     for (int i = 0; i < numberOfObjects; i++) {
-        EnvironmentObject *currObject = listOfObjects[i];
+        EnvironmentObject* currObject = listOfObjects[i];
         currObject->moveObjectDown(deltaTime);
     }
 
@@ -86,7 +97,7 @@ void AllEnvironmentObjects::moveAllObjectsLeft(float deltaTime) {
     }
     
     for (int i = 0; i < numberOfObjects; i++) {
-        EnvironmentObject *currObject = listOfObjects[i];
+        EnvironmentObject* currObject = listOfObjects[i];
         currObject->moveObjectLeft(deltaTime);
     }
 
@@ -111,4 +122,11 @@ void AllEnvironmentObjects::moveAllObjectsDownAndLeft(float deltaTime) {
     moveAllObjectsDown(deltaTime);
     moveAllObjectsLeft(deltaTime);
 
+}
+
+void AllEnvironmentObjects::freeMemory() {
+    for (int i = 0; i < numberOfObjects; i++) {
+        delete listOfObjects[i];
+    }
+    delete[] AllEnvironmentObjects::listOfObjects;
 }
